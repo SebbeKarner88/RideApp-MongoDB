@@ -2,12 +2,17 @@ package com.example.mongodbtestprogram;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+
 
 @SpringBootApplication
-public class MongoDbTestprogramApplication {
+@EnableMongoRepositories
+public class MongoDbTestprogramApplication{
 
-	public static void main(String[] args) {
-		SpringApplication.run(MongoDbTestprogramApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MongoDbTestprogramApplication.class, args);
+
+    }
 
 }
+
