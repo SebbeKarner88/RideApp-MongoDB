@@ -1,5 +1,6 @@
 package com.example.mongodbtestprogram.Service;
 
+import com.example.mongodbtestprogram.Dto.BikeDTO;
 import com.example.mongodbtestprogram.Entities.BikeEntity;
 import com.example.mongodbtestprogram.Repositories.BikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +40,20 @@ public class BikeService {
         return bikeRepository.findByModel(model);
     }
 
+
+    private static BikeDTO bikeDTO(BikeEntity bikeEntity) {
+        return new BikeDTO(
+                bikeEntity.getMaker(),
+                bikeEntity.getModel(),
+                bikeEntity.getSize(),
+                bikeEntity.getPictures(),
+                bikeEntity.getYear(),
+                bikeEntity.getType(),
+                bikeEntity.getColors(),
+                bikeEntity.getMaterial(),
+                bikeEntity.getWheelSize(),
+                bikeEntity.getGears(),
+                bikeEntity.getEBike()
+        );
+    }
 }
