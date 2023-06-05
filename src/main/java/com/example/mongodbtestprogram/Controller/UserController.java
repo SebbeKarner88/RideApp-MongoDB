@@ -37,16 +37,17 @@ public class UserController {
 
     private static UserEntity toUserEntity(UserDTO userDTO) {
         return new UserEntity(
-                userDTO.userName(),
-                userDTO.password(),
-                userDTO.firstName(),
-                userDTO.lastName(),
-                userDTO.phoneNumber(),
-                userDTO.street(),
-                userDTO.streetNumber(),
-                userDTO.zipCode(),
-                userDTO.city(),
-                userDTO.country());
+                userDTO.getUserName(),
+                userDTO.getPassword(),
+                userDTO.getFirstName(),
+                userDTO.getLastName(),
+                userDTO.getPhoneNumber(),
+                userDTO.getStreet(),
+                userDTO.getStreetNumber(),
+                userDTO.getZipCode(),
+                userDTO.getCity(),
+                userDTO.getCountry(),
+                userDTO.getBikeCollection());
     }
 
     private static UserDTO toUserDTO(UserEntity userEntity) {
@@ -60,7 +61,8 @@ public class UserController {
                 userEntity.getStreetNumber(),
                 userEntity.getZipCode(),
                 userEntity.getCity(),
-                userEntity.getCountry());
+                userEntity.getCountry(),
+                userEntity.getBikeCollection());
     }
 
 }

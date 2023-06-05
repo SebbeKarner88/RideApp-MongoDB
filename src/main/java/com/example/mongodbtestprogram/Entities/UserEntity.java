@@ -21,5 +21,6 @@ public class UserEntity {
     String zipCode;
     String city;
     String country;
+    BikeEntity[] bikeCollection;
 
 }

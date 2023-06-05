@@ -34,7 +34,8 @@ public class UserService {
                 userEntity.getStreetNumber(),
                 userEntity.getZipCode(),
                 userEntity.getCity(),
-                userEntity.getCountry()
+                userEntity.getCountry(),
+                userEntity.getBikeCollection()
         );
         userRepository.save(newUser);
         return userEntity;
