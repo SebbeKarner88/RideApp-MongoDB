@@ -1,5 +1,6 @@
 package com.example.mongodbtestprogram.Controller;
 
+import com.example.mongodbtestprogram.Dto.BikeDTO;
 import com.example.mongodbtestprogram.Dto.UserDTO;
 import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Service.UserService;
@@ -32,6 +33,14 @@ public class UserController {
         return userService.getAll()
                 .stream()
                 .map(UserController::toUserDTO)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/getCollectionByUsername")
+    public List<BikeDTO> getCollectionByUsername(@RequestHeader String userName) {
+        return userService.getCollectionByUsername(userName)
+                .stream()
+                .map(BikeController::toBikeDTO)
                 .collect(Collectors.toList());
     }
 

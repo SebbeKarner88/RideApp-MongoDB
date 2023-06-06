@@ -46,7 +46,7 @@ public class BikeController {
     }
 
 
-    private static BikeDTO toBikeDTO(BikeEntity bikeEntity) {
+    static BikeDTO toBikeDTO(BikeEntity bikeEntity) {
         return new BikeDTO(
                 bikeEntity.getMaker(),
                 bikeEntity.getModel(),
@@ -61,7 +61,7 @@ public class BikeController {
                 bikeEntity.getEBike()
         );
     }
-    private static BikeEntity toBikeEntity(BikeDTO bikeDTO) {
+    static BikeEntity toBikeEntity(BikeDTO bikeDTO) {
         return new BikeEntity(
                 bikeDTO.getMaker(),
                 bikeDTO.getModel(),
