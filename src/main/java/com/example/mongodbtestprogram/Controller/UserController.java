@@ -1,6 +1,7 @@
 package com.example.mongodbtestprogram.Controller;
 
 import com.example.mongodbtestprogram.Dto.BikeDTO;
+import com.example.mongodbtestprogram.Dto.LoginDTO;
 import com.example.mongodbtestprogram.Dto.UserDTO;
 import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Service.UserService;
@@ -15,7 +16,6 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -28,6 +28,11 @@ public class UserController {
                 ));
     }
 
+    @PostMapping("/login")
+    public LoginDTO loginUser(@RequestBody LoginDTO loginDTO) {
+    return userService.loginUser(loginDTO);
+    }
+
     @GetMapping("/getAll")
     public List<UserDTO> getAllUsers() {
         return userService.getAll()
@@ -35,6 +40,7 @@ public class UserController {
                 .map(UserController::toUserDTO)
                 .collect(Collectors.toList());
     }
+
 
     @GetMapping("/getCollectionByUsername")
     public List<BikeDTO> getCollectionByUsername(@RequestHeader String userName) {
@@ -58,7 +64,6 @@ public class UserController {
                 userDTO.getCountry(),
                 userDTO.getBikeCollection());
     }
-
     private static UserDTO toUserDTO(UserEntity userEntity) {
         return new UserDTO(
                 userEntity.getUserName(),

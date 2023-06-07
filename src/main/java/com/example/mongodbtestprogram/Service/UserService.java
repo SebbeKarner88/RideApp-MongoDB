@@ -1,5 +1,6 @@
 package com.example.mongodbtestprogram.Service;
 
+import com.example.mongodbtestprogram.Dto.LoginDTO;
 import com.example.mongodbtestprogram.Entities.BikeEntity;
 import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Repositories.UserRepository;
@@ -20,7 +21,6 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -42,11 +42,12 @@ public class UserService {
         userRepository.save(newUser);
         return userEntity;
     }
-
+    public LoginDTO loginUser(LoginDTO loginDTO) {
+        return null;
+    }
     public List<UserEntity> getAll() {
         return userRepository.findAll();
     }
-
     public List<BikeEntity> getCollectionByUsername(String userName) {
 
         UserEntity user = userRepository.findByUserName(userName);
