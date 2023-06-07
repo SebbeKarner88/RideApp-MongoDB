@@ -42,7 +42,7 @@ public class UserService {
         userRepository.save(newUser);
         return userEntity;
     }
-    public LoginDTO loginUser(LoginDTO loginDTO) {
+    public Boolean loginUser(LoginDTO loginDTO) {
         return null;
     }
     public List<UserEntity> getAll() {
