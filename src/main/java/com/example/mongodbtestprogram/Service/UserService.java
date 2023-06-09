@@ -25,22 +25,14 @@ public class UserService {
         return new BCryptPasswordEncoder();
     }
 
-    public UserEntity addUser(UserEntity userEntity) {
-        UserEntity newUser = new UserEntity(
-                userEntity.getUserName(),
-                passwordEncoder().encode(userEntity.getPassword()),
-                userEntity.getFirstName(),
-                userEntity.getLastName(),
-                userEntity.getPhoneNumber(),
-                userEntity.getStreet(),
-                userEntity.getStreetNumber(),
-                userEntity.getZipCode(),
-                userEntity.getCity(),
-                userEntity.getCountry(),
-                userEntity.getBikeCollection()
-        );
-        userRepository.save(newUser);
-        return userEntity;
+    public Boolean addUser(UserEntity userEntity) {
+
+        if (userRepository.existsByUserName(userEntity.getUserName()))
+            return false;
+
+        userEntity.setPassword(passwordEncoder().encode(userEntity.getPassword()));
+        userRepository.save(userEntity);
+        return true;
     }
     public Boolean loginUser(LoginDTO loginDTO) {
         return null;

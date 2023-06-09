@@ -22,10 +22,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public UserDTO registerUser(@RequestBody UserDTO userDTO) {
-        return UserController.toUserDTO(
-                userService.addUser(UserController.toUserEntity(userDTO)
-                ));
+    public Boolean registerUser(@RequestBody UserDTO userDTO) {
+        return userService.addUser(UserController.toUserEntity(userDTO));
     }
 
     @PostMapping("/login")
