@@ -5,6 +5,7 @@ import com.example.mongodbtestprogram.Entities.BikeEntity;
 import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,15 @@ public class UserService {
         return true;
     }
     public Boolean loginUser(LoginDTO loginDTO) {
-        return null;
+
+        if (userRepository.existsByUserName(loginDTO.username())) {
+            UserEntity user = userRepository.findByUserName(loginDTO.username());
+
+            return BCrypt.checkpw(loginDTO.password(), user.getPassword());
+        }
+        return false;
     }
+
     public List<UserEntity> getAll() {
         return userRepository.findAll();
     }
