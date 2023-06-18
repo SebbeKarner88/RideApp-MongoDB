@@ -2,13 +2,17 @@ package com.example.mongodbtestprogram.Dto;
 
 
 import com.example.mongodbtestprogram.Entities.BikeEntity;
+import com.example.mongodbtestprogram.Enum.Role;
 import lombok.Value;
 
 @Value
 public class UserDTO {
 
-        String userName;
+        String username;
         String password;
+        Role role;
+
+        String token;
 
         String firstName;
         String lastName;

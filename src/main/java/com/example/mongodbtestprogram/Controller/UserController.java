@@ -21,10 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/register")
-    public Boolean registerUser(@RequestBody UserDTO userDTO) {
-        return userService.addUser(UserController.toUserEntity(userDTO));
-    }
 
     @PostMapping("/login")
     public Boolean loginUser(@RequestBody LoginDTO loginDTO) {
@@ -39,19 +35,12 @@ public class UserController {
                 .collect(Collectors.toList());
     }
 
-
-    @GetMapping("/getCollectionByUsername")
-    public List<BikeDTO> getCollectionByUsername(@RequestHeader String userName) {
-        return userService.getCollectionByUsername(userName)
-                .stream()
-                .map(BikeController::toBikeDTO)
-                .collect(Collectors.toList());
-    }
-
     private static UserEntity toUserEntity(UserDTO userDTO) {
         return new UserEntity(
-                userDTO.getUserName(),
+                userDTO.getUsername(),
                 userDTO.getPassword(),
+                userDTO.getRole(),
+                userDTO.getToken(),
                 userDTO.getFirstName(),
                 userDTO.getLastName(),
                 userDTO.getPhoneNumber(),
@@ -64,8 +53,10 @@ public class UserController {
     }
     private static UserDTO toUserDTO(UserEntity userEntity) {
         return new UserDTO(
-                userEntity.getUserName(),
+                userEntity.getUsername(),
                 userEntity.getPassword(),
+                userEntity.getRole(),
+                userEntity.getToken(),
                 userEntity.getFirstName(),
                 userEntity.getLastName(),
                 userEntity.getPhoneNumber(),
