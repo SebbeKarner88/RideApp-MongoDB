@@ -19,7 +19,6 @@ public class UserEntity implements UserDetails{
     String username;
     String password;
     Role role;
-    String token;
 
     String firstName;
     String lastName;

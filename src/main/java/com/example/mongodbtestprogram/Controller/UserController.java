@@ -1,7 +1,5 @@
 package com.example.mongodbtestprogram.Controller;
 
-import com.example.mongodbtestprogram.Dto.BikeDTO;
-import com.example.mongodbtestprogram.Dto.LoginDTO;
 import com.example.mongodbtestprogram.Dto.UserDTO;
 import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Service.UserService;
@@ -22,11 +20,6 @@ public class UserController {
     }
 
 
-    @PostMapping("/login")
-    public Boolean loginUser(@RequestBody LoginDTO loginDTO) {
-    return userService.loginUser(loginDTO);
-    }
-
     @GetMapping("/getAll")
     public List<UserDTO> getAllUsers() {
         return userService.getAll()
@@ -40,7 +33,6 @@ public class UserController {
                 userDTO.getUsername(),
                 userDTO.getPassword(),
                 userDTO.getRole(),
-                userDTO.getToken(),
                 userDTO.getFirstName(),
                 userDTO.getLastName(),
                 userDTO.getPhoneNumber(),
@@ -56,7 +48,6 @@ public class UserController {
                 userEntity.getUsername(),
                 userEntity.getPassword(),
                 userEntity.getRole(),
-                userEntity.getToken(),
                 userEntity.getFirstName(),
                 userEntity.getLastName(),
                 userEntity.getPhoneNumber(),

@@ -12,8 +12,6 @@ public class UserDTO {
         String password;
         Role role;
 
-        String token;
-
         String firstName;
         String lastName;
         String phoneNumber;

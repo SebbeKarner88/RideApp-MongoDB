@@ -8,9 +8,11 @@ import com.example.mongodbtestprogram.Security.Register.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 
 
 @Service
@@ -23,7 +25,17 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        UserEntity user = UserEntity
+
+        Optional<UserEntity> test = userRepository.findByUsername(request.getUsername());
+
+        if (test.isPresent()) {
+            return AuthenticationResponse
+                    .builder()
+                    .token("Username not available!")
+                    .build();
+        }
+
+        var user = UserEntity
                 .builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -41,7 +53,6 @@ public class AuthenticationService {
 
         var jwtToken = jwtService.generateToken(user);
 
-        user.setToken(jwtToken);
         userRepository.save(user);
 
         return AuthenticationResponse
@@ -51,21 +62,29 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                )
-        );
 
-        UserEntity user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow();
+        // authenticationManager.authenticate(                   NÅTT JIDDER MED DENNA!
+        //       new UsernamePasswordAuthenticationToken(
+        //                request.getUsername(),
+        //                request.getPassword()
+        //        )
+        //);
 
-        var jwtToken = jwtService.generateToken(user);
+        Optional<UserEntity> user = userRepository.findByUsername(request.getUsername());
+
+        if (user.isPresent() && BCrypt.checkpw(request.getPassword(), user.get().getPassword())) {
+
+            var jwtToken = jwtService.generateToken(user.get());
+
+            return AuthenticationResponse
+                    .builder()
+                    .token(jwtToken)
+                    .build();
+        }
 
         return AuthenticationResponse
                 .builder()
-                .token(jwtToken)
+                .token("Username does not exist/ Wrong password")
                 .build();
     }
 }
