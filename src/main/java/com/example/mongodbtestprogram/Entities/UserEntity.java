@@ -1,6 +1,5 @@
 package com.example.mongodbtestprogram.Entities;
 import com.example.mongodbtestprogram.Enum.Role;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,7 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Date;
+
 import java.util.List;
 
 @Document("users")
