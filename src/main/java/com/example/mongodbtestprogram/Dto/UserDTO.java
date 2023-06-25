@@ -5,6 +5,8 @@ import com.example.mongodbtestprogram.Entities.BikeEntity;
 import com.example.mongodbtestprogram.Enum.Role;
 import lombok.Value;
 
+import java.util.Date;
+
 @Value
 public class UserDTO {
 

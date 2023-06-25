@@ -2,6 +2,7 @@ package com.example.mongodbtestprogram.Security.Register;
 
 import com.example.mongodbtestprogram.Entities.BikeEntity;
 import com.example.mongodbtestprogram.Enum.Role;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

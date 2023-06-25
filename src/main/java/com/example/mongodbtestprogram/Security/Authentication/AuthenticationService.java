@@ -31,7 +31,7 @@ public class AuthenticationService {
         if (test.isPresent()) {
             return AuthenticationResponse
                     .builder()
-                    .token("Username not available!")
+                    .token("Error: 1") // Username not available!
                     .build();
         }
 
@@ -72,19 +72,27 @@ public class AuthenticationService {
 
         Optional<UserEntity> user = userRepository.findByUsername(request.getUsername());
 
-        if (user.isPresent() && BCrypt.checkpw(request.getPassword(), user.get().getPassword())) {
+        if (user.isPresent()) {
 
-            var jwtToken = jwtService.generateToken(user.get());
+            if (BCrypt.checkpw(request.getPassword(), user.get().getPassword())) {
+
+                var jwtToken = jwtService.generateToken(user.get());
+
+                return AuthenticationResponse
+                        .builder()
+                        .token(jwtToken)
+                        .build();
+            }
 
             return AuthenticationResponse
                     .builder()
-                    .token(jwtToken)
+                    .token("Error 2") // Wrong password.
                     .build();
         }
 
         return AuthenticationResponse
                 .builder()
-                .token("Username does not exist/ Wrong password")
+                .token("Error 1") // Username dose not exist.
                 .build();
     }
 }
