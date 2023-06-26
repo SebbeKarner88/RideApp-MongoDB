@@ -10,7 +10,6 @@ import lombok.Value;
 public class UserDTO {
 
         String username;
-        String password;
         Role role;
 
         String firstName;

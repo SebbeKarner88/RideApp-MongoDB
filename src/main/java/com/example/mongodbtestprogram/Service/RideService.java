@@ -1,8 +1,10 @@
 package com.example.mongodbtestprogram.Service;
 
 import com.example.mongodbtestprogram.Entities.RideEntity;
+import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Functions.Functions;
 import com.example.mongodbtestprogram.Repositories.RideRepository;
+import com.example.mongodbtestprogram.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,19 +12,19 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 
-import static java.lang.Math.round;
 
 @Service
 public class RideService {
 
     private final RideRepository rideRepository;
-
+    private final UserRepository userRepository;
     @Autowired
-    public RideService(RideRepository rideRepository) {
+    public RideService(RideRepository rideRepository, UserRepository userRepository) {
         this.rideRepository = rideRepository;
+        this.userRepository = userRepository;
     }
-
 
     public List<RideEntity> getAll() {
         return rideRepository.findAll();
@@ -30,37 +32,43 @@ public class RideService {
 
     public RideEntity addRide(RideEntity rideEntity) {
 
-        BigDecimal distanceRounded = new BigDecimal(
-                Functions.distance(                           // DISPLAYED IN KM
-                        rideEntity.getStartLoc().getLatitude(),
-                        rideEntity.getEndLoc().getLatitude(),
-                        rideEntity.getStartLoc().getLongitude(),
-                        rideEntity.getEndLoc().getLongitude())
-        ).setScale(2, RoundingMode.HALF_UP);
+       Optional<UserEntity> user = userRepository.findByUsername(rideEntity.getUser().getUsername());
 
-        Duration d = Duration.between(rideEntity.getStartTime(), rideEntity.getEndTime());
+       if (user.isPresent()) {
 
-        String durationDisplay = Functions.formatDuration(d);  // RETURNS A STRING WITH TIME
+           BigDecimal distanceRounded = new BigDecimal(
+                   Functions.distance(                           // DISPLAYED IN KM
+                           rideEntity.getStartLoc().getLatitude(),
+                           rideEntity.getEndLoc().getLatitude(),
+                           rideEntity.getStartLoc().getLongitude(),
+                           rideEntity.getEndLoc().getLongitude())
+           ).setScale(2, RoundingMode.HALF_UP);
 
-        Double avgSpeed = distanceRounded.doubleValue() / (((double) d.toSeconds() / 60) / 60); // Displayed in KMT
+           Duration d = Duration.between(rideEntity.getStartTime(), rideEntity.getEndTime());
 
+           String durationDisplay = Functions.formatDuration(d);  // RETURNS A STRING WITH TIME
 
-        RideEntity ride = new RideEntity(
-                rideEntity.getUser(),
-                rideEntity.getBike(),
-                rideEntity.getStartTime(),
-                rideEntity.getEndTime(),
-                rideEntity.getStartLoc(),
-                rideEntity.getEndLoc(),
-                distanceRounded.doubleValue(),
-                durationDisplay,
-                avgSpeed
+           Double avgSpeed = distanceRounded.doubleValue() / (((double) d.toSeconds() / 60) / 60); // Displayed in KMT
 
 
-        );
+           RideEntity ride = new RideEntity(
+                   rideEntity.getUser(),
+                   rideEntity.getBike(),
+                   rideEntity.getStartTime(),
+                   rideEntity.getEndTime(),
+                   rideEntity.getStartLoc(),
+                   rideEntity.getEndLoc(),
+                   distanceRounded.doubleValue(),
+                   durationDisplay,
+                   avgSpeed
 
-        rideRepository.save(ride);
-        return ride;
+
+           );
+
+           rideRepository.save(ride);
+           return ride;
+       }
+       return null;
     }
 
     public List<RideEntity> getAllByUser(String username) {

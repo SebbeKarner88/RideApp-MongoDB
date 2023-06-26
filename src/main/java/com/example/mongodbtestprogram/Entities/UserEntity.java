@@ -1,5 +1,6 @@
 package com.example.mongodbtestprogram.Entities;
 import com.example.mongodbtestprogram.Enum.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +19,7 @@ import java.util.List;
 public class UserEntity implements UserDetails{
 
     String username;
+    @JsonIgnore
     String password;
     Role role;
 

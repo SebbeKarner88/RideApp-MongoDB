@@ -28,25 +28,9 @@ public class UserController {
                 .collect(Collectors.toList());
     }
 
-    private static UserEntity toUserEntity(UserDTO userDTO) {
-        return new UserEntity(
-                userDTO.getUsername(),
-                userDTO.getPassword(),
-                userDTO.getRole(),
-                userDTO.getFirstName(),
-                userDTO.getLastName(),
-                userDTO.getPhoneNumber(),
-                userDTO.getStreet(),
-                userDTO.getStreetNumber(),
-                userDTO.getZipCode(),
-                userDTO.getCity(),
-                userDTO.getCountry(),
-                userDTO.getBikeCollection());
-    }
     private static UserDTO toUserDTO(UserEntity userEntity) {
         return new UserDTO(
                 userEntity.getUsername(),
-                userEntity.getPassword(),
                 userEntity.getRole(),
                 userEntity.getFirstName(),
                 userEntity.getLastName(),
