@@ -6,6 +6,8 @@ import com.example.mongodbtestprogram.Entities.UserEntity;
 import lombok.Value;
 
 import java.time.LocalDateTime;
+
+
 @Value
 public class RideDTO {
 
@@ -18,4 +20,7 @@ public class RideDTO {
     GeoLocationEntity startLoc;
     GeoLocationEntity endLoc;
 
+    Double rideLengthKM;
+    String rideDuration;
+    Double avgSpeedKMT;
 }

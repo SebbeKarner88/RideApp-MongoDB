@@ -1,7 +1,9 @@
 package com.example.mongodbtestprogram.Controller;
 
 import com.example.mongodbtestprogram.Dto.RideDTO;
+import com.example.mongodbtestprogram.Dto.StatsDTO;
 import com.example.mongodbtestprogram.Entities.RideEntity;
+import com.example.mongodbtestprogram.Entities.StatsEntity;
 import com.example.mongodbtestprogram.Service.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,13 +28,20 @@ public class RideController {
     }
 
     @GetMapping("/getAll")
-    public List<RideDTO> getAllUsers() {
+    public List<RideDTO> getAllRides() {
         return rideService.getAll()
                 .stream()
                 .map(RideController::torideDTO)
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/getAllByUser")
+    public List<RideDTO> getAllByUser(@RequestHeader String username) {
+        return rideService.getAllByUser(username)
+                .stream()
+                .map(RideController::torideDTO)
+                .collect(Collectors.toList());
+    }
 
     private static RideDTO torideDTO(RideEntity rideEntity) {
         return new RideDTO(
@@ -41,7 +50,10 @@ public class RideController {
                 rideEntity.getStartTime(),
                 rideEntity.getEndTime(),
                 rideEntity.getStartLoc(),
-                rideEntity.getEndLoc()
+                rideEntity.getEndLoc(),
+                rideEntity.getRideLengthKM(),
+                rideEntity.getRideDuration(),
+                rideEntity.getAvgSpeedKMT()
         );
     }
 }

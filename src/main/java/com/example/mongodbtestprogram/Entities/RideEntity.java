@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+
 @Document("rides")
 @AllArgsConstructor
 @Getter
@@ -19,5 +20,9 @@ public class RideEntity {
 
     GeoLocationEntity startLoc;
     GeoLocationEntity endLoc;
+
+    Double rideLengthKM;
+    String rideDuration;
+    Double avgSpeedKMT;
 
 }

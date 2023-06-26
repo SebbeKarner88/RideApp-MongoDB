@@ -1,6 +1,20 @@
-package com.example.mongodbtestprogram;
+package com.example.mongodbtestprogram.Functions;
 
-public class Methods {
+import java.time.Duration;
+
+public class Functions {
+
+    public static String formatDuration(Duration duration) {
+        long seconds = duration.getSeconds();
+        long absSeconds = Math.abs(seconds);
+        String positive = String.format(
+                "%d:%02d:%02d",
+                absSeconds / 3600,
+                (absSeconds % 3600) / 60,
+                absSeconds % 60);
+        return seconds < 0 ? "-" + positive : positive;
+    }
+
     public static double distance(double lat1, double lat2, double lon1, double lon2)
     {
         // The math module contains a function
