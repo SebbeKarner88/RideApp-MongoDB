@@ -37,7 +37,7 @@ public class RideService {
        if (user.isPresent()) {
 
            BigDecimal distanceRounded = new BigDecimal(
-                   Functions.distance(                           // DISPLAYED IN KM
+                   Functions.distance(                               // DISPLAYED IN KM
                            rideEntity.getStartLoc().getLatitude(),
                            rideEntity.getEndLoc().getLatitude(),
                            rideEntity.getStartLoc().getLongitude(),
@@ -46,7 +46,7 @@ public class RideService {
 
            Duration d = Duration.between(rideEntity.getStartTime(), rideEntity.getEndTime());
 
-           String durationDisplay = Functions.formatDuration(d);  // RETURNS A STRING WITH TIME
+           String durationDisplay = Functions.formatDuration(d);    // RETURNS A STRING WITH TIME
 
            Double avgSpeed = distanceRounded.doubleValue() / (((double) d.toSeconds() / 60) / 60); // Displayed in KMT
 
@@ -61,8 +61,6 @@ public class RideService {
                    distanceRounded.doubleValue(),
                    durationDisplay,
                    avgSpeed
-
-
            );
 
            rideRepository.save(ride);
