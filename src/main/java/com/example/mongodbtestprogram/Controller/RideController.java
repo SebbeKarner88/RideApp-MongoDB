@@ -23,8 +23,8 @@ public class RideController {
 
     @PostMapping("/add")
     public RideEntity addRide(@RequestHeader UUID userId,
-                           @RequestHeader UUID bikeId,
-                           @RequestBody RideEntity rideEntity) {
+                              @RequestHeader UUID bikeId,
+                              @RequestBody RideEntity rideEntity) {
         return rideService.addRide(userId, bikeId, rideEntity);
     }
 
@@ -32,7 +32,7 @@ public class RideController {
     public List<RideDTO> getAllRides() {
         return rideService.getAll()
                 .stream()
-                .map(RideController::torideDTO)
+                .map(RideController::toRideDTO)
                 .collect(Collectors.toList());
     }
 
@@ -40,11 +40,16 @@ public class RideController {
     public List<RideDTO> getAllByUser(@RequestHeader String username) {
         return rideService.getAllByUser(username)
                 .stream()
-                .map(RideController::torideDTO)
+                .map(RideController::toRideDTO)
                 .collect(Collectors.toList());
     }
 
-    private static RideDTO torideDTO(RideEntity rideEntity) {
+    @DeleteMapping("/deleteById")
+    public Boolean deleteById(@RequestHeader UUID rideId) {
+        return rideService.deleteById(rideId);
+    }
+
+    private static RideDTO toRideDTO(RideEntity rideEntity) {
         return new RideDTO(
                 rideEntity.getRideId(),
                 rideEntity.getUser(),

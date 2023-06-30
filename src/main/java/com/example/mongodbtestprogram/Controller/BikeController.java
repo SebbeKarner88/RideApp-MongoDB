@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,8 +23,14 @@ public class BikeController {
 
 
     @PostMapping("/add")
-    public BikeEntity addBike(@RequestBody BikeEntity bikeEntity) {
-        return bikeService.addBike(bikeEntity);
+    public BikeDTO addBike(@RequestBody BikeEntity bikeEntity) {
+        return toBikeDTO(bikeService.addBike(bikeEntity));
+    }
+
+    @PostMapping("/addToBikeCollection")
+    public BikeDTO addToBikeCollection (@RequestHeader UUID userId,
+                                        @RequestBody BikeEntity bikeEntity) {
+        return toBikeDTO(bikeService.addToBikeCollection(userId, bikeEntity));
     }
 
     @GetMapping("/getAll")
@@ -59,6 +66,7 @@ public class BikeController {
     }
 
 
+
     static BikeDTO toBikeDTO(BikeEntity bikeEntity) {
         return new BikeDTO(
                 bikeEntity.getBikeId(),
@@ -73,22 +81,6 @@ public class BikeController {
                 bikeEntity.getWheelSize(),
                 bikeEntity.getGears(),
                 bikeEntity.getEBike()
-        );
-    }
-    static BikeEntity toBikeEntity(BikeDTO bikeDTO) {
-        return new BikeEntity(
-                bikeDTO.getBikeId(),
-                bikeDTO.getMaker(),
-                bikeDTO.getModel(),
-                bikeDTO.getSize(),
-                bikeDTO.getPictures(),
-                bikeDTO.getYear(),
-                bikeDTO.getType(),
-                bikeDTO.getColors(),
-                bikeDTO.getMaterial(),
-                bikeDTO.getWheelSize(),
-                bikeDTO.getGears(),
-                bikeDTO.getEBike()
         );
     }
 }

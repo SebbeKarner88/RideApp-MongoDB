@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,6 +27,11 @@ public class UserController {
                 .stream()
                 .map(UserController::toUserDTO)
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/deleteById")
+    public Boolean deleteById(@RequestHeader UUID userId) {
+        return userService.deleteById(userId);
     }
 
     private static UserDTO toUserDTO(UserEntity userEntity) {

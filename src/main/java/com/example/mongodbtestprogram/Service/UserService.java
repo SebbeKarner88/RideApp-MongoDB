@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -22,4 +24,14 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Boolean deleteById(UUID userId) {
+
+        Optional<UserEntity> userOp = userRepository.findById(userId);
+
+        if (userOp.isPresent()) {
+            userRepository.deleteById(userId);
+            return true;
+        }
+        return false;
+    }
 }
