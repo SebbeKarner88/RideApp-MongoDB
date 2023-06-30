@@ -2,6 +2,7 @@ package com.example.mongodbtestprogram.Entities;
 
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class RideEntity {
-
+    @MongoId
     UUID rideId;
     UserEntity user;
     BikeEntity bike;

@@ -35,8 +35,8 @@ public class RideService {
 
     public RideEntity addRide(UUID userId, UUID bikeId, RideEntity rideEntity) {
 
-       Optional<UserEntity> userOP = userRepository.findByUserId(userId);
-       Optional<BikeEntity> bikeOP = bikeRepository.findByBikeId(bikeId);
+       Optional<UserEntity> userOP = userRepository.findById(userId);
+       Optional<BikeEntity> bikeOP = bikeRepository.findById(bikeId);
 
        if (userOP.isPresent() && bikeOP.isPresent()) {
 
@@ -100,7 +100,12 @@ public class RideService {
 
            rideRepository.save(ride);
 
-           // LÄGG TILL FUNKTION FÖR ATT ADDA RIDE TILL RÄTT USERENTITY.
+           // SAVE A RIDE TO THE SPECIFIED USERENTITY
+           UserEntity user1 = userRepository.findById(userId).get();
+           List<RideEntity> list = user1.getUserRides();
+           list.add(ride);
+           user1.setUserRides(list);
+           userRepository.saveAll(List.of(user1));
 
            return ride;
        }
