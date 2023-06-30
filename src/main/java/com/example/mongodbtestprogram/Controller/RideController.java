@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,8 +22,10 @@ public class RideController {
     }
 
     @PostMapping("/add")
-    public RideEntity addRide(@RequestBody RideEntity rideEntity) {
-        return rideService.addRide(rideEntity);
+    public RideEntity addRide(@RequestHeader UUID userId,
+                           @RequestHeader UUID bikeId,
+                           @RequestBody RideEntity rideEntity) {
+        return rideService.addRide(userId, bikeId, rideEntity);
     }
 
     @GetMapping("/getAll")

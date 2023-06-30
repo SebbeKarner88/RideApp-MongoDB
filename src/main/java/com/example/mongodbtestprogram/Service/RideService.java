@@ -1,8 +1,10 @@
 package com.example.mongodbtestprogram.Service;
 
+import com.example.mongodbtestprogram.Entities.BikeEntity;
 import com.example.mongodbtestprogram.Entities.RideEntity;
 import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Functions.Functions;
+import com.example.mongodbtestprogram.Repositories.BikeRepository;
 import com.example.mongodbtestprogram.Repositories.RideRepository;
 import com.example.mongodbtestprogram.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Duration;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -21,21 +21,55 @@ public class RideService {
 
     private final RideRepository rideRepository;
     private final UserRepository userRepository;
+    private final BikeRepository bikeRepository;
     @Autowired
-    public RideService(RideRepository rideRepository, UserRepository userRepository) {
+    public RideService(RideRepository rideRepository, UserRepository userRepository, BikeRepository bikeRepository) {
         this.rideRepository = rideRepository;
         this.userRepository = userRepository;
+        this.bikeRepository = bikeRepository;
     }
 
     public List<RideEntity> getAll() {
         return rideRepository.findAll();
     }
 
-    public RideEntity addRide(RideEntity rideEntity) {
+    public RideEntity addRide(UUID userId, UUID bikeId, RideEntity rideEntity) {
 
-       Optional<UserEntity> user = userRepository.findByUsername(rideEntity.getUser().getUsername());
+       Optional<UserEntity> userOP = userRepository.findByUserId(userId);
+       Optional<BikeEntity> bikeOP = bikeRepository.findByBikeId(bikeId);
 
-       if (user.isPresent()) {
+       if (userOP.isPresent() && bikeOP.isPresent()) {
+
+           UserEntity user = new UserEntity(
+                   userOP.get().getUserId(),
+                   userOP.get().getUsername(),
+                   userOP.get().getPassword(),
+                   userOP.get().getRole(),
+                   userOP.get().getFirstName(),
+                   userOP.get().getLastName(),
+                   userOP.get().getPhoneNumber(),
+                   userOP.get().getStreet(),
+                   userOP.get().getStreetNumber(),
+                   userOP.get().getZipCode(),
+                   userOP.get().getCity(),
+                   userOP.get().getCountry(),
+                   userOP.get().getBikeCollection(),
+                   userOP.get().getUserRides()
+           );
+           BikeEntity bike = new BikeEntity(
+                   bikeOP.get().getBikeId(),
+                   bikeOP.get().getMaker(),
+                   bikeOP.get().getModel(),
+                   bikeOP.get().getSize(),
+                   bikeOP.get().getPictures(),
+                   bikeOP.get().getYear(),
+                   bikeOP.get().getType(),
+                   bikeOP.get().getColors(),
+                   bikeOP.get().getMaterial(),
+                   bikeOP.get().getWheelSize(),
+                   bikeOP.get().getGears(),
+                   bikeOP.get().getEBike()
+           );
 
            BigDecimal distanceRounded = new BigDecimal(
                    Functions.distance(                               // DISPLAYED IN KM
@@ -53,8 +87,8 @@ public class RideService {
 
            RideEntity ride = new RideEntity(
                    UUID.randomUUID(),
-                   rideEntity.getUser(),
-                   rideEntity.getBike(),
+                   user,
+                   bike,
                    rideEntity.getStartTime(),
                    rideEntity.getEndTime(),
                    rideEntity.getStartLoc(),
@@ -65,6 +99,9 @@ public class RideService {
            );
 
            rideRepository.save(ride);
+
+           // LÄGG TILL FUNKTION FÖR ATT ADDA RIDE TILL RÄTT USERENTITY.
+
            return ride;
        }
        return null;

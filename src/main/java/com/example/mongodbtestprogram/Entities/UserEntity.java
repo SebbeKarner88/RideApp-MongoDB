@@ -33,8 +33,8 @@ public class UserEntity implements UserDetails{
     String zipCode;
     String city;
     String country;
-    BikeEntity[] bikeCollection;
-    RideEntity[] userRides;
+    List<BikeEntity> bikeCollection;
+    List<RideEntity> userRides;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

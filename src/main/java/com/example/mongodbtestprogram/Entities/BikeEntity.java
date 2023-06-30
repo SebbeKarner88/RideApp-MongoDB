@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 import java.util.UUID;
 
 @Document("bikes")
@@ -18,10 +19,10 @@ public class BikeEntity {
     String maker;
     String model;
     Sizes size;
-    String[] pictures;
+    List<String> pictures;
     Long year;
     String type;
-    String[] colors;
+    List<String> colors;
     String material;
     Double wheelSize;
     String gears;

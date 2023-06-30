@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -50,8 +51,8 @@ public class AuthenticationService {
                 .zipCode(request.getZipCode())
                 .city(request.getCity())
                 .country(request.getCountry())
-                .bikeCollection(request.getBikeCollection())
-                .userRides(request.getUserRides())
+                .bikeCollection(List.of(request.getBikeCollection()))
+                .userRides(List.of(request.getUserRides()))
                 .build();
 
         var jwtToken = jwtService.generateToken(user);

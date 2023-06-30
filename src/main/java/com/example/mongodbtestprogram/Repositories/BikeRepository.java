@@ -5,8 +5,12 @@ import com.example.mongodbtestprogram.Enum.Sizes;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-public interface BikeRepository extends MongoRepository<BikeEntity, String> {
+public interface BikeRepository extends MongoRepository<BikeEntity, UUID> {
+
+    Optional<BikeEntity> findByBikeId(UUID bikeId);
 
     List<BikeEntity> findByMaker(String maker);
     List<BikeEntity> findByModel(String model);

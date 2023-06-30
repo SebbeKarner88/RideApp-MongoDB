@@ -6,6 +6,7 @@ import com.example.mongodbtestprogram.Entities.RideEntity;
 import com.example.mongodbtestprogram.Enum.Role;
 import lombok.Value;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -25,6 +26,6 @@ public class UserDTO {
         String zipCode;
         String city;
         String country;
-        BikeEntity[] bikeCollection;
-        RideEntity[] userRides;
+        List<BikeEntity> bikeCollection;
+        List<RideEntity> userRides;
 }
