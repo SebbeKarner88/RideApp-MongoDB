@@ -6,10 +6,13 @@ import com.example.mongodbtestprogram.Entities.UserEntity;
 import lombok.Value;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 @Value
 public class RideDTO {
+
+    UUID rideId;
 
     UserEntity user;
     BikeEntity bike;

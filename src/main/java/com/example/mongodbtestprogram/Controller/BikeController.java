@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/bike")
@@ -26,28 +27,41 @@ public class BikeController {
     }
 
     @GetMapping("/getAll")
-    public List<BikeEntity> getAllBikes() {
-        return bikeService.getAllBikes();
+    public List<BikeDTO> getAllBikes() {
+        return bikeService.getAllBikes()
+                .stream()
+                .map(BikeController::toBikeDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/getBikeByMaker")
-    public List<BikeEntity> getBikeByMaker(@RequestHeader String maker) {
-        return bikeService.getBikeByMaker(maker);
+    public List<BikeDTO> getBikeByMaker(@RequestHeader String maker) {
+        return bikeService.getBikeByMaker(maker)
+                .stream()
+                .map(BikeController::toBikeDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/getBikeByModel")
-    public List<BikeEntity> getBikeByModel(@RequestHeader String model) {
-        return bikeService.getBikeByModel(model);
+    public List<BikeDTO> getBikeByModel(@RequestHeader String model) {
+        return bikeService.getBikeByModel(model)
+                .stream()
+                .map(BikeController::toBikeDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/getBikeByType")
-    public List<BikeEntity> getBikeByType(@RequestHeader String type) {
-        return bikeService.getBikeByType(type);
+    public List<BikeDTO> getBikeByType(@RequestHeader String type) {
+        return bikeService.getBikeByType(type)
+                .stream()
+                .map(BikeController::toBikeDTO)
+                .collect(Collectors.toList());
     }
 
 
     static BikeDTO toBikeDTO(BikeEntity bikeEntity) {
         return new BikeDTO(
+                bikeEntity.getBikeId(),
                 bikeEntity.getMaker(),
                 bikeEntity.getModel(),
                 bikeEntity.getSize(),
@@ -63,6 +77,7 @@ public class BikeController {
     }
     static BikeEntity toBikeEntity(BikeDTO bikeDTO) {
         return new BikeEntity(
+                bikeDTO.getBikeId(),
                 bikeDTO.getMaker(),
                 bikeDTO.getModel(),
                 bikeDTO.getSize(),

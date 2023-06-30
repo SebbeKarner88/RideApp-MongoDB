@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BikeService {
@@ -19,6 +20,7 @@ public class BikeService {
 
 
     public BikeEntity addBike(BikeEntity bikeEntity) {
+        bikeEntity.setBikeId(UUID.randomUUID());
         bikeRepository.save(bikeEntity);
         return bikeEntity;
     }

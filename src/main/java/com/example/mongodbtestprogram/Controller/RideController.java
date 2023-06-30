@@ -1,9 +1,7 @@
 package com.example.mongodbtestprogram.Controller;
 
 import com.example.mongodbtestprogram.Dto.RideDTO;
-import com.example.mongodbtestprogram.Dto.StatsDTO;
 import com.example.mongodbtestprogram.Entities.RideEntity;
-import com.example.mongodbtestprogram.Entities.StatsEntity;
 import com.example.mongodbtestprogram.Service.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +43,7 @@ public class RideController {
 
     private static RideDTO torideDTO(RideEntity rideEntity) {
         return new RideDTO(
+                rideEntity.getRideId(),
                 rideEntity.getUser(),
                 rideEntity.getBike(),
                 rideEntity.getStartTime(),

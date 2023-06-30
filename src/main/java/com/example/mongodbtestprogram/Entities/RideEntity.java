@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 @Document("rides")
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 public class RideEntity {
 
+    UUID rideId;
     UserEntity user;
     BikeEntity bike;
 

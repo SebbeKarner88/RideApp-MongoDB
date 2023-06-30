@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -37,6 +38,7 @@ public class AuthenticationService {
 
         var user = UserEntity
                 .builder()
+                .userId(UUID.randomUUID())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
@@ -49,6 +51,7 @@ public class AuthenticationService {
                 .city(request.getCity())
                 .country(request.getCountry())
                 .bikeCollection(request.getBikeCollection())
+                .userRides(request.getUserRides())
                 .build();
 
         var jwtToken = jwtService.generateToken(user);
@@ -66,7 +69,7 @@ public class AuthenticationService {
         // authenticationManager.authenticate(                   NÅTT JIDDER MED DENNA!
         //       new UsernamePasswordAuthenticationToken(
         //                request.getUsername(),
-        //                request.getPassword()
+        //                request.getPassword() // BEHÖVER AVKODAS MED BCRYPT?
         //        )
         //);
 

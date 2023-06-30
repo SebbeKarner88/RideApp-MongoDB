@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 import java.util.List;
+import java.util.UUID;
 
 @Document("users")
 @Data
@@ -18,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserEntity implements UserDetails{
 
+    UUID userId;
     String username;
     @JsonIgnore
     String password;
@@ -32,6 +34,7 @@ public class UserEntity implements UserDetails{
     String city;
     String country;
     BikeEntity[] bikeCollection;
+    RideEntity[] userRides;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

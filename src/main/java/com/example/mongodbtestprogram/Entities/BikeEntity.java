@@ -6,12 +6,15 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.UUID;
+
 @Document("bikes")
 @AllArgsConstructor
 @Getter
 @Setter
 public class BikeEntity {
 
+    UUID bikeId;
     String maker;
     String model;
     Sizes size;

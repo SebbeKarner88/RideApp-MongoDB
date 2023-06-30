@@ -30,6 +30,7 @@ public class UserController {
 
     private static UserDTO toUserDTO(UserEntity userEntity) {
         return new UserDTO(
+                userEntity.getUserId(),
                 userEntity.getUsername(),
                 userEntity.getRole(),
                 userEntity.getFirstName(),
@@ -40,7 +41,8 @@ public class UserController {
                 userEntity.getZipCode(),
                 userEntity.getCity(),
                 userEntity.getCountry(),
-                userEntity.getBikeCollection());
+                userEntity.getBikeCollection(),
+                userEntity.getUserRides());
     }
 
 }

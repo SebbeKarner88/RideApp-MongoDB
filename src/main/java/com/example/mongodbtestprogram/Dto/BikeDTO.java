@@ -3,8 +3,12 @@ package com.example.mongodbtestprogram.Dto;
 import com.example.mongodbtestprogram.Enum.Sizes;
 import lombok.Value;
 
+import java.util.UUID;
+
 @Value
 public class BikeDTO {
+
+    UUID bikeId;
     String maker;
     String model;
     Sizes size;

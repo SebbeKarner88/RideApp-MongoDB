@@ -13,6 +13,7 @@ import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -50,8 +51,8 @@ public class RideService {
 
            Double avgSpeed = distanceRounded.doubleValue() / (((double) d.toSeconds() / 60) / 60); // Displayed in KMT
 
-
            RideEntity ride = new RideEntity(
+                   UUID.randomUUID(),
                    rideEntity.getUser(),
                    rideEntity.getBike(),
                    rideEntity.getStartTime(),

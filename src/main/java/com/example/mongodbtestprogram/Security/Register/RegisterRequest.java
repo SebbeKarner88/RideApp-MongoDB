@@ -1,18 +1,22 @@
 package com.example.mongodbtestprogram.Security.Register;
 
 import com.example.mongodbtestprogram.Entities.BikeEntity;
+import com.example.mongodbtestprogram.Entities.RideEntity;
 import com.example.mongodbtestprogram.Enum.Role;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequest {
+
+    UUID userId;
 
     String username;
     String password;
@@ -27,4 +31,5 @@ public class RegisterRequest {
     String city;
     String country;
     BikeEntity[] bikeCollection;
+    RideEntity[] userRides;
 }
