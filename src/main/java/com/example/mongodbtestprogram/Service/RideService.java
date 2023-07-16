@@ -12,11 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+
 
 @Service
 public class RideService {
@@ -46,13 +44,7 @@ public class RideService {
             UserEntity user = OptionalToEntity.MapUser(userOP);
             BikeEntity bike = OptionalToEntity.MapBike(bikeOP);
 
-            /* DISPLAYED IN KM
-            BigDecimal distanceRounded = new BigDecimal(
-                    Functions.distance(
-                            rideEntity.getStartLoc(),
-                            rideEntity.getEndLoc())
-            ).setScale(2, RoundingMode.HALF_UP);
-            */
+            // Calculates total distance between checkpoints
             BigDecimal distance = Functions.calcTotalDistance(rideEntity);
 
             // RETURNS A STRING WITH TIME
@@ -89,6 +81,7 @@ public class RideService {
 
         if (rides.isEmpty())
             return null;
+
         return rides;
     }
 
