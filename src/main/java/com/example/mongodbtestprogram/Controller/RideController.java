@@ -56,8 +56,7 @@ public class RideController {
                 rideEntity.getBike(),
                 rideEntity.getStartTime(),
                 rideEntity.getEndTime(),
-                rideEntity.getStartLoc(),
-                rideEntity.getEndLoc(),
+                rideEntity.getLocCheckpoints(),
                 rideEntity.getRideLengthKM(),
                 rideEntity.getRideDuration(),
                 rideEntity.getAvgSpeedKMT()

@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class RideService {
@@ -44,14 +46,14 @@ public class RideService {
             UserEntity user = OptionalToEntity.MapUser(userOP);
             BikeEntity bike = OptionalToEntity.MapBike(bikeOP);
 
-            // DISPLAYED IN KM
+            /* DISPLAYED IN KM
             BigDecimal distanceRounded = new BigDecimal(
                     Functions.distance(
-                            rideEntity.getStartLoc().getLatitude(),
-                            rideEntity.getEndLoc().getLatitude(),
-                            rideEntity.getStartLoc().getLongitude(),
-                            rideEntity.getEndLoc().getLongitude())
+                            rideEntity.getStartLoc(),
+                            rideEntity.getEndLoc())
             ).setScale(2, RoundingMode.HALF_UP);
+            */
+            BigDecimal distance = Functions.calcTotalDistance(rideEntity);
 
             // RETURNS A STRING WITH TIME
             Duration d = Duration.between(rideEntity.getStartTime(), rideEntity.getEndTime());
@@ -62,11 +64,10 @@ public class RideService {
                     bike,
                     rideEntity.getStartTime(),
                     rideEntity.getEndTime(),
-                    rideEntity.getStartLoc(),
-                    rideEntity.getEndLoc(),
-                    distanceRounded.doubleValue(),
-                    Functions.formatDuration(d),
-                    distanceRounded.doubleValue() / (((double) d.toSeconds() / 60) / 60)
+                    rideEntity.getLocCheckpoints(),
+                    distance.doubleValue(),
+                    Functions.formatDuration(d), // Formatting to a time String.
+                    distance.doubleValue() / (((double) d.toSeconds() / 60) / 60) // Displaying Km/T
             );
 
             rideRepository.save(ride);

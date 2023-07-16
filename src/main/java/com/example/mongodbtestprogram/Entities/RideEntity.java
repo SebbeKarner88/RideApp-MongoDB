@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -21,8 +22,7 @@ public class RideEntity {
     LocalDateTime startTime; //  '1996-12-31T21:50:35.0' example.
     LocalDateTime endTime;
 
-    GeoLocationEntity startLoc;
-    GeoLocationEntity endLoc;
+    List <GeoLocationEntity> locCheckpoints;
 
     Double rideLengthKM;
     String rideDuration;

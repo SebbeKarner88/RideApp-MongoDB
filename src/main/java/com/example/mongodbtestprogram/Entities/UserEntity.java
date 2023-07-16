@@ -24,6 +24,7 @@ public class UserEntity implements UserDetails{
     String username;
     @JsonIgnore
     String password;
+    @JsonIgnore
     Role role;
 
     String firstName;

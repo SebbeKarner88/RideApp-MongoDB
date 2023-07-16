@@ -1,8 +1,34 @@
 package com.example.mongodbtestprogram.Functions;
 
+import com.example.mongodbtestprogram.Entities.GeoLocationEntity;
+import com.example.mongodbtestprogram.Entities.RideEntity;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Functions {
+
+    public static BigDecimal calcTotalDistance(RideEntity rideEntity) {
+
+            List<Double> checkpointDistance = new ArrayList<>();
+
+            for (int i = 0; i < rideEntity.getLocCheckpoints().size()-1; i++) {
+
+                Double distance = Functions.distance(
+                        rideEntity.getLocCheckpoints().get(i),
+                        rideEntity.getLocCheckpoints().get(i+1));
+                checkpointDistance.add(distance);
+            }
+
+            Double totalDistance = checkpointDistance
+                    .stream()
+                    .reduce(0d, Double::sum);
+
+            return new BigDecimal(totalDistance).setScale(2, RoundingMode.HALF_UP);
+    }
 
     public static String formatDuration(Duration duration) {
         long seconds = duration.getSeconds();
@@ -15,8 +41,13 @@ public class Functions {
         return seconds < 0 ? "-" + positive : positive;
     }
 
-    public static double distance(double lat1, double lat2, double lon1, double lon2)
+    public static double distance(GeoLocationEntity loc1,GeoLocationEntity loc2)
     {
+        double lat1 = loc1.getLatitude();
+        double lat2 = loc2.getLatitude();
+        double lon1 = loc1.getLongitude();
+        double lon2  = loc2.getLongitude();
+
         // The math module contains a function
         // named toRadians which converts from
         // degrees to radians.
