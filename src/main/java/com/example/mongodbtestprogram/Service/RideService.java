@@ -4,6 +4,7 @@ import com.example.mongodbtestprogram.Entities.BikeEntity;
 import com.example.mongodbtestprogram.Entities.RideEntity;
 import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Functions.Functions;
+import com.example.mongodbtestprogram.Mappers.OptionalToEntity;
 import com.example.mongodbtestprogram.Repositories.BikeRepository;
 import com.example.mongodbtestprogram.Repositories.RideRepository;
 import com.example.mongodbtestprogram.Repositories.UserRepository;
@@ -14,7 +15,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.*;
-
 
 @Service
 public class RideService {
@@ -41,49 +41,20 @@ public class RideService {
 
         if (userOP.isPresent() && bikeOP.isPresent()) {
 
-            UserEntity user = new UserEntity(
-                    userOP.get().getUserId(),
-                    userOP.get().getUsername(),
-                    userOP.get().getPassword(),
-                    userOP.get().getRole(),
-                    userOP.get().getFirstName(),
-                    userOP.get().getLastName(),
-                    userOP.get().getPhoneNumber(),
-                    userOP.get().getStreet(),
-                    userOP.get().getStreetNumber(),
-                    userOP.get().getZipCode(),
-                    userOP.get().getCity(),
-                    userOP.get().getCountry(),
-                    userOP.get().getBikeCollection(),
-                    userOP.get().getUserRides()
-            );
-            BikeEntity bike = new BikeEntity(
-                    bikeOP.get().getBikeId(),
-                    bikeOP.get().getMaker(),
-                    bikeOP.get().getModel(),
-                    bikeOP.get().getSize(),
-                    bikeOP.get().getPictures(),
-                    bikeOP.get().getYear(),
-                    bikeOP.get().getType(),
-                    bikeOP.get().getColors(),
-                    bikeOP.get().getMaterial(),
-                    bikeOP.get().getWheelSize(),
-                    bikeOP.get().getGears(),
-                    bikeOP.get().getEBike()
-            );
+            UserEntity user = OptionalToEntity.MapUser(userOP);
+            BikeEntity bike = OptionalToEntity.MapBike(bikeOP);
 
+            // DISPLAYED IN KM
             BigDecimal distanceRounded = new BigDecimal(
-                    Functions.distance(                               // DISPLAYED IN KM
+                    Functions.distance(
                             rideEntity.getStartLoc().getLatitude(),
                             rideEntity.getEndLoc().getLatitude(),
                             rideEntity.getStartLoc().getLongitude(),
                             rideEntity.getEndLoc().getLongitude())
             ).setScale(2, RoundingMode.HALF_UP);
 
+            // RETURNS A STRING WITH TIME
             Duration d = Duration.between(rideEntity.getStartTime(), rideEntity.getEndTime());
-            String durationDisplay = Functions.formatDuration(d);    // RETURNS A STRING WITH TIME
-
-            Double avgSpeed = distanceRounded.doubleValue() / (((double) d.toSeconds() / 60) / 60); // Displayed in KMT
 
             RideEntity ride = new RideEntity(
                     UUID.randomUUID(),
@@ -94,8 +65,8 @@ public class RideService {
                     rideEntity.getStartLoc(),
                     rideEntity.getEndLoc(),
                     distanceRounded.doubleValue(),
-                    durationDisplay,
-                    avgSpeed
+                    Functions.formatDuration(d),
+                    distanceRounded.doubleValue() / (((double) d.toSeconds() / 60) / 60)
             );
 
             rideRepository.save(ride);

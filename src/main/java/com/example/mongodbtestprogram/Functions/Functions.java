@@ -34,8 +34,7 @@ public class Functions {
 
         double c = 2 * Math.asin(Math.sqrt(a));
 
-        // Radius of earth in kilometers. Use 3956
-        // for miles
+        // Radius of earth in kilometers. Use 3956 for miles
         double r = 6371;
 
         return(c * r);

@@ -23,27 +23,10 @@ public class BikeService {
         this.userRepository = userRepository;
     }
 
-
     public BikeEntity addBike(BikeEntity bikeEntity) {
         bikeEntity.setBikeId(UUID.randomUUID());
         bikeRepository.save(bikeEntity);
         return bikeEntity;
-    }
-
-    public List<BikeEntity> getAllBikes() {
-        return bikeRepository.findAll();
-    }
-
-    public List<BikeEntity> getBikeByType(String type) {
-        return bikeRepository.findByType(type);
-    }
-
-    public List<BikeEntity> getBikeByMaker(String maker) {
-        return bikeRepository.findByMaker(maker);
-    }
-
-    public List<BikeEntity> getBikeByModel(String model) {
-        return bikeRepository.findByModel(model);
     }
 
     public BikeEntity addToBikeCollection(UUID userId, BikeEntity bikeEntity) {
@@ -67,28 +50,33 @@ public class BikeService {
 
             return filteredList.get(0);
         }
-        BikeEntity bike = new BikeEntity(
-                UUID.randomUUID(),
-                bikeEntity.getMaker(),
-                bikeEntity.getModel(),
-                bikeEntity.getSize(),
-                bikeEntity.getPictures(),
-                bikeEntity.getYear(),
-                bikeEntity.getType(),
-                bikeEntity.getColors(),
-                bikeEntity.getMaterial(),
-                bikeEntity.getWheelSize(),
-                bikeEntity.getGears(),
-                bikeEntity.getEBike()
-        );
+
+        bikeEntity.setBikeId(UUID.randomUUID());
 
         List<BikeEntity> userCollection = user.getBikeCollection();
-        userCollection.add(bike); // ADDING A NEW BIKE TO COLLECTION AND TO BIKEENTITY.
+        userCollection.add(bikeEntity); // ADDING A NEW BIKE TO COLLECTION AND TO BIKEENTITY.
         user.setBikeCollection(userCollection);
         userRepository.saveAll(List.of(user));
-        bikeRepository.save(bike);
+        bikeRepository.save(bikeEntity);
 
-        return bike;
+        return bikeEntity;
     }
+
+    public List<BikeEntity> getAllBikes() {
+        return bikeRepository.findAll();
+    }
+
+    public List<BikeEntity> getBikeByType(String type) {
+        return bikeRepository.findByType(type);
+    }
+
+    public List<BikeEntity> getBikeByMaker(String maker) {
+        return bikeRepository.findByMaker(maker);
+    }
+
+    public List<BikeEntity> getBikeByModel(String model) {
+        return bikeRepository.findByModel(model);
+    }
+
 
 }
