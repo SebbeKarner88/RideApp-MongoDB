@@ -1,6 +1,7 @@
 package com.example.mongodbtestprogram.Controller;
 
 import com.example.mongodbtestprogram.Dto.RideDTO;
+import com.example.mongodbtestprogram.Entities.GeoLocationEntity;
 import com.example.mongodbtestprogram.Entities.RideEntity;
 import com.example.mongodbtestprogram.Service.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class RideController {
                               @RequestHeader UUID bikeId,
                               @RequestBody RideEntity rideEntity) {
         return rideService.addRide(userId, bikeId, rideEntity);
+    }
+
+    @PostMapping("/addCheckpoint")
+    public RideEntity addCheckpoint(@RequestHeader UUID rideId,
+                                    @RequestBody GeoLocationEntity geoLocationEntity) {
+        return rideService.addCheckpoint(rideId, geoLocationEntity);
     }
 
     @GetMapping("/getAll")

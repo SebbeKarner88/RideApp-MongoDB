@@ -1,6 +1,7 @@
 package com.example.mongodbtestprogram.Service;
 
 import com.example.mongodbtestprogram.Entities.BikeEntity;
+import com.example.mongodbtestprogram.Entities.GeoLocationEntity;
 import com.example.mongodbtestprogram.Entities.RideEntity;
 import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Functions.Functions;
@@ -105,5 +106,16 @@ public class RideService {
             return true;
         }
         return false;
+    }
+
+    public RideEntity addCheckpoint(UUID rideId, GeoLocationEntity geoLocationEntity) {
+
+        RideEntity ride = rideRepository.findById(rideId).get();
+        ride.getLocCheckpoints().add(geoLocationEntity);
+        rideRepository.save(ride);
+
+        // MÅSTE UPPDATERA PÅ USER OCKSÅ!!!
+
+        return ride;
     }
 }

@@ -41,4 +41,17 @@ public class OptionalToEntity {
                 bikeOP.get().getGears(),
                 bikeOP.get().getEBike())).orElse(null);
     }
+
+    public static RideEntity MapRide(Optional<RideEntity> rideOP) {
+        return rideOP.map(RideEntity -> new RideEntity(
+                rideOP.get().getRideId(),
+                rideOP.get().getUser(),
+                rideOP.get().getBike(),
+                rideOP.get().getStartTime(),
+                rideOP.get().getEndTime(),
+                rideOP.get().getLocCheckpoints(),
+                rideOP.get().getRideLengthKM(),
+                rideOP.get().getRideDuration(),
+                rideOP.get().getAvgSpeedKMT())).orElse(null);
+    }
 }
