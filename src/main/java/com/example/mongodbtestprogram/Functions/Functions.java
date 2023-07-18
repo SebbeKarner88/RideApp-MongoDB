@@ -6,18 +6,23 @@ import com.example.mongodbtestprogram.Entities.RideEntity;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Functions {
 
-    public static RideEntity updateStatistics (RideEntity currentRide) {
+    public static RideEntity updateRideWithCheckpoint (RideEntity currentRide, GeoLocationEntity geoLocationEntity) {
+
+        currentRide.setEndTime(LocalDateTime.now());
+        currentRide.getLocCheckpoints().add(geoLocationEntity);
 
         double distanceUpdate = Functions.calcTotalDistance(currentRide).doubleValue();
         Duration d = Duration.between(currentRide.getStartTime(), currentRide.getEndTime());
 
+        currentRide.setRideDuration(Functions.formatDuration(d));
         currentRide.setRideLengthKM(distanceUpdate);
-        currentRide.setAvgSpeedKMT(distanceUpdate / ((d.toSeconds() / 60) / 60));
+        currentRide.setAvgSpeedKMT((distanceUpdate / (((double) d.toSeconds() / 60) / 60)));
 
         return currentRide;
     }

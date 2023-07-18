@@ -12,11 +12,8 @@ import com.example.mongodbtestprogram.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
-
 
 @Service
 public class RideService {
@@ -47,33 +44,33 @@ public class RideService {
             BikeEntity bike = OptionalToEntity.MapBike(bikeOP);
 
             // Calculates total distance between checkpoints
-            BigDecimal distance = Functions.calcTotalDistance(rideEntity);
+           // BigDecimal distance = Functions.calcTotalDistance(rideEntity);
 
             // RETURNS A STRING WITH TIME
-            Duration d = Duration.between(rideEntity.getStartTime(), rideEntity.getEndTime());
+           // Duration d = Duration.between(rideEntity.getStartTime(), rideEntity.getEndTime());
 
             RideEntity ride = new RideEntity(
                     UUID.randomUUID(),
                     user,
                     bike,
-                    rideEntity.getStartTime(),
-                    rideEntity.getEndTime(),
+                    LocalDateTime.now(),
+                    LocalDateTime.now(),
                     rideEntity.getLocCheckpoints(),
-                    distance.doubleValue(),
-                    Functions.formatDuration(d), // Formatting to a time String.
-                    distance.doubleValue() / (((double) d.toSeconds() / 60) / 60) // Displaying Km/T
+                    null,
+                    null, // Formatting to a time String.
+                    null // Displaying Km/T
             );
 
             rideRepository.save(ride);
 
             // SAVE THE RIDE TO THE SPECIFIED USERENTITY
-            UserEntity user1 = userRepository.findById(userId).get();
-            List<RideEntity> list = user1.getUserRides();
-            list.add(ride);
-            user1.setUserRides(list);
-            userRepository.saveAll(List.of(user1));
+               UserEntity user1 = userRepository.findById(userId).get();
+               List<RideEntity> list = user1.getUserRides();
+               list.add(ride);
+               user1.setUserRides(list);
+               userRepository.saveAll(List.of(user1));
 
-            return ride;
+               return ride;
         }
         return null;
     }
@@ -120,9 +117,8 @@ public class RideService {
                 .findAny().get();
 
         user.getUserRides().remove(currentRide);
-        currentRide.getLocCheckpoints().add(geoLocationEntity);
 
-        RideEntity updatedRide = Functions.updateStatistics(currentRide);
+        RideEntity updatedRide = Functions.updateRideWithCheckpoint(currentRide, geoLocationEntity);
 
         user.getUserRides().add(updatedRide);
         userRepository.save(user);
