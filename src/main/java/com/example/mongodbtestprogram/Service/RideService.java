@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -111,10 +112,28 @@ public class RideService {
     public RideEntity addCheckpoint(UUID rideId, GeoLocationEntity geoLocationEntity) {
 
         RideEntity ride = rideRepository.findById(rideId).get();
-        ride.getLocCheckpoints().add(geoLocationEntity);
-        rideRepository.save(ride);
+        UserEntity user = userRepository.findById(ride.getUser().getUserId()).get();
 
-        // MÅSTE UPPDATERA PÅ USER OCKSÅ!!!
+        // FUNGERAR, Kan bryta ut metod senare
+
+        RideEntity currentRide = user.getUserRides()
+                .stream()
+                .filter(x -> x.getRideId().equals(rideId))
+                .findAny().get();
+
+        user.getUserRides().remove(currentRide);
+        currentRide.getLocCheckpoints().add(geoLocationEntity);
+
+        double distanceUpdate = Functions.calcTotalDistance(currentRide).doubleValue();
+        Duration d = Duration.between(currentRide.getStartTime(), currentRide.getEndTime());
+
+        currentRide.setRideLengthKM(distanceUpdate);
+        currentRide.setAvgSpeedKMT(distanceUpdate / ((d.toSeconds() / 60) / 60));
+        user.getUserRides().add(currentRide);
+        userRepository.save(user);
+
+        ride = currentRide;
+        rideRepository.save(ride);
 
         return ride;
     }
