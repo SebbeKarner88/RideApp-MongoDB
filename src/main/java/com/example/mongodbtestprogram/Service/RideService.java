@@ -50,9 +50,9 @@ public class RideService {
                     LocalDateTime.now(),
                     LocalDateTime.now(),
                     rideEntity.getLocCheckpoints(),
-                    null,
-                    null,
-                    null
+                    0d,
+                    "00:00:00",
+                    0d
             );
 
             rideRepository.save(ride);
