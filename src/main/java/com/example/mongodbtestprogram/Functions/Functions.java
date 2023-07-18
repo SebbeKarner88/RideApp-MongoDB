@@ -11,6 +11,17 @@ import java.util.List;
 
 public class Functions {
 
+    public static RideEntity updateStatistics (RideEntity currentRide) {
+
+        double distanceUpdate = Functions.calcTotalDistance(currentRide).doubleValue();
+        Duration d = Duration.between(currentRide.getStartTime(), currentRide.getEndTime());
+
+        currentRide.setRideLengthKM(distanceUpdate);
+        currentRide.setAvgSpeedKMT(distanceUpdate / ((d.toSeconds() / 60) / 60));
+
+        return currentRide;
+    }
+
     public static BigDecimal calcTotalDistance(RideEntity rideEntity) {
 
             List<Double> checkpointDistance = new ArrayList<>();

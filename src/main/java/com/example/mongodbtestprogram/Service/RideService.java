@@ -114,8 +114,6 @@ public class RideService {
         RideEntity ride = rideRepository.findById(rideId).get();
         UserEntity user = userRepository.findById(ride.getUser().getUserId()).get();
 
-        // FUNGERAR, Kan bryta ut metod senare
-
         RideEntity currentRide = user.getUserRides()
                 .stream()
                 .filter(x -> x.getRideId().equals(rideId))
@@ -124,17 +122,12 @@ public class RideService {
         user.getUserRides().remove(currentRide);
         currentRide.getLocCheckpoints().add(geoLocationEntity);
 
-        double distanceUpdate = Functions.calcTotalDistance(currentRide).doubleValue();
-        Duration d = Duration.between(currentRide.getStartTime(), currentRide.getEndTime());
+        RideEntity updatedRide = Functions.updateStatistics(currentRide);
 
-        currentRide.setRideLengthKM(distanceUpdate);
-        currentRide.setAvgSpeedKMT(distanceUpdate / ((d.toSeconds() / 60) / 60));
-        user.getUserRides().add(currentRide);
+        user.getUserRides().add(updatedRide);
         userRepository.save(user);
+        rideRepository.save(updatedRide);
 
-        ride = currentRide;
-        rideRepository.save(ride);
-
-        return ride;
+        return updatedRide;
     }
 }
