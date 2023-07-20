@@ -1,9 +1,18 @@
+FROM node:20-alpine
 
-FROM node:17-alpine3.12
+RUN addgroup app && adduser -S -G app app
+
 WORKDIR /app
-COPY package.json .
-COPY package-lock.json .
-RUN npm i
-COPY . .
+RUN chown -R app:app /app
+
+USER app
+
+COPY --chown=app:app package.json ./
+
+RUN npm install
+
+COPY --chown=app:app . .
+
 EXPOSE 5173
+
 CMD ["npm", "run", "dev"]
