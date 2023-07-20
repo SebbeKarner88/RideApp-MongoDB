@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  frontend:
+    depends_on:
+      - backend
+    build: ./Frontend
+    ports:
+      - 5173:5173
+
+  backend:
+    build: .
+    ports:
+      - 8080:8080
+
