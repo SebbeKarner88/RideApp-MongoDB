@@ -1,5 +1,10 @@
 FROM node:20-alpine
 
+ENV TZ=Europe/Stockholm
+
+RUN apk add --no-cache tzdata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN addgroup app && adduser -S -G app app
 
 WORKDIR /app
