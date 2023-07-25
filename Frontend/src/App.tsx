@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {
+    BrowserRouter,
+    Route,
+    Routes
+} from "react-router-dom";
+import {Grid, GridItem} from "@chakra-ui/react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Landing from "./components/Landing";
+import About from "./components/About";
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <>
+            <div className='container'>
+                <BrowserRouter>
+                    <Grid
+                        templateAreas={{
+                            base: `"header"
+                                    "main"
+                                    "footer"`
+                        }}
+                        templateColumns={{
+                            base: `1fr`
+                        }}
+                        templateRows={`100px 1fr 50px`}
+                        height={'100vh'}
+                    >
+                        <GridItem area={'header'}>
+                            <Header/>
+                        </GridItem>
+                        <GridItem area={'main'}>
+                            <Routes>
+                                <Route path='/' element={<Landing></Landing>}/>
+                                <Route path='/about' element={<About></About>}/>
+                            </Routes>
+                        </GridItem>
+                        <GridItem area={'footer'}>
+                            <Footer/>
+                        </GridItem>
+                    </Grid>
+                </BrowserRouter>
+            </div>
+        </>
+    )
 }
 
 export default App
