@@ -3,6 +3,7 @@ import {HStack, Image} from "@chakra-ui/react";
 import logo from '../assets/images/RideApp-cropped-logo.webp'
 import {Link} from "react-router-dom";
 import './CSS/Header.styles.css'
+import NavBar from "./Navbar";
 
 
 const Header = ({width, breakpoint}) => {
@@ -21,7 +22,7 @@ const Header = ({width, breakpoint}) => {
                         </Link> : null}
                     </HStack>
                 </div>
-                <h1>NAVBAR</h1>
+                <NavBar breakpoint={breakpoint} width={width}/>
             </HStack>
         </>
     );

@@ -1,0 +1,28 @@
+.burgerMenuButton {
+    border: 1px Solid #a67e3f;
+}
+
+.burgerMenuLogo {
+    color: rgb(180, 136, 68);
+}
+
+.burgermenu {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    font-size: 22px;
+    border-color: rgb(185, 139, 66);
+}
+
+.navbar {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    font-size: 20px;
+    border-color: rgb(185, 139, 66);
+}
+
+.navAbout:hover,
+.navLanding:hover,
+.navLogin:hover,
+.navBikeDB:hover {
+    color: #ffc46f;
+}

@@ -10,6 +10,8 @@ import Footer from "./components/Footer";
 import Landing from "./components/Landing";
 import About from "./components/About";
 import React from "react";
+import Login from "./components/Login";
+import BikeDB from "./components/BikeDB";
 
 
 function App() {
@@ -43,7 +45,9 @@ function App() {
                         <GridItem area={'main'}>
                             <Routes>
                                 <Route path='/' element={<Landing breakpoint={breakpoint} width={width}/>}/>
-                                <Route path='/about' element={<About></About>}/>
+                                <Route path='/about' element={<About breakpoint={breakpoint} width={width}/>}/>
+                                <Route path='/login' element={<Login breakpoint={breakpoint} width={width}/>}/>
+                                <Route path='/bikeDB' element={<BikeDB breakpoint={breakpoint} width={width}/>}/>
                             </Routes>
                         </GridItem>
                         <GridItem area={'footer'}>
