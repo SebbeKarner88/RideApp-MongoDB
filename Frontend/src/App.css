@@ -1,0 +1,7 @@
+.container {
+    background-image: url('assets/images/santa-cruz-megatower-mobile.png');
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+}
