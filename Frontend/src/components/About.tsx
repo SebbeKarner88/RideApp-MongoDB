@@ -1,6 +1,6 @@
 import React from 'react';
 
-const About = () => {
+const About = ({width, breakpoint}) => {
 
     return (
         <>

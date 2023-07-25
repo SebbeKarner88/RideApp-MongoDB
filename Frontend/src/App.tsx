@@ -9,13 +9,21 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Landing from "./components/Landing";
 import About from "./components/About";
+import React from "react";
 
 
 function App() {
 
+    const [width, setWidth] = React.useState(window.innerWidth);
+    const breakpoint = 600;
+
+    React.useEffect(() => {
+        window.addEventListener("resize", () => setWidth(window.innerWidth));
+    }, []);
+
     return (
         <>
-            <div className='container'>
+            <div className={width > breakpoint ? 'containerDesktop' : 'containerMobile'}>
                 <BrowserRouter>
                     <Grid
                         templateAreas={{
@@ -26,15 +34,15 @@ function App() {
                         templateColumns={{
                             base: `1fr`
                         }}
-                        templateRows={`100px 1fr 50px`}
+                        templateRows={`110px 1fr 50px`}
                         height={'100vh'}
                     >
                         <GridItem area={'header'}>
-                            <Header/>
+                            <Header breakpoint={breakpoint} width={width}/>
                         </GridItem>
                         <GridItem area={'main'}>
                             <Routes>
-                                <Route path='/' element={<Landing></Landing>}/>
+                                <Route path='/' element={<Landing breakpoint={breakpoint} width={width}/>}/>
                                 <Route path='/about' element={<About></About>}/>
                             </Routes>
                         </GridItem>

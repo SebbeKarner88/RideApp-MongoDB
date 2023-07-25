@@ -1,5 +1,13 @@
-.container {
+.containerMobile {
     background-image: url('assets/images/santa-cruz-megatower-mobile.png');
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+}
+
+.containerDesktop {
+    background-image: url('assets/images/santa-cruz-megatower-drivetrain.webp');
     background-size: cover;
     height: 100vh;
     width: 100vw;

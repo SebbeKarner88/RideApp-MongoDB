@@ -1,0 +1,9 @@
+.footerBox {
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.78);
+    border-top: 3px Solid rgba(42, 42, 42, 0.4);
+    padding: 10px 20px;
+    backdrop-filter: blur(2px);
+    font-family: 'consolas', serif;
+    color: rgb(166, 126, 63);
+}

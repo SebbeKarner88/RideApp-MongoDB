@@ -1,0 +1,16 @@
+.headerBox {
+    background-color: rgba(0, 0, 0, 0.78);
+    border-bottom: 3px Solid rgba(42, 42, 42, 0.4);
+    backdrop-filter: blur(2px);
+    font-family: 'Press Start 2P', cursive;
+    color: rgb(166, 126, 63);
+}
+
+.logo {
+    border-radius: 10px;
+    border: 2px Solid #a67e3f;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.99);
+    padding: 7px;
+    background-color: #111111;
+    margin-left: 30px;
+}

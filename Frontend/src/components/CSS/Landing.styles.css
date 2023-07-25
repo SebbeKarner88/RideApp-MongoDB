@@ -1,0 +1,7 @@
+.logoBox {
+    border-radius: 10px;
+    border: 2px Solid #604301;
+    box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.99);
+    padding: 7px;
+    background-color: #111111;
+}
