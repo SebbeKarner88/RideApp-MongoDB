@@ -67,12 +67,12 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
-        // authenticationManager.authenticate(                   NÅTT JIDDER MED DENNA!
-        //       new UsernamePasswordAuthenticationToken(
-        //                request.getUsername(),
-        //                request.getPassword() // BEHÖVER AVKODAS MED BCRYPT?
-        //        )
-        //);
+         //authenticationManager.authenticate(
+              //new UsernamePasswordAuthenticationToken(
+               //         request.getUsername(),
+             //          request.getPassword() // BEHÖVER AVKODAS MED BCRYPT?
+           //     )
+         //);
 
         Optional<UserEntity> user = userRepository.findByUsername(request.getUsername());
 

@@ -2,7 +2,7 @@
     height: 50px;
     background-color: rgba(0, 0, 0, 0.78);
     border-top: 2px Solid rgba(166, 126, 63, 0.63);
-    padding: 10px 20px;
+    padding: 10px 10px;
     backdrop-filter: blur(2px);
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
