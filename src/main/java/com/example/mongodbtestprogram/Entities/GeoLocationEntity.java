@@ -13,5 +13,4 @@ public class GeoLocationEntity {
 
     Double latitude;
     Double longitude;
-
 }

@@ -21,7 +21,6 @@ public class BikeController {
         this.bikeService = bikeService;
     }
 
-
     @PostMapping("/add")
     public BikeDTO addBike(@RequestBody BikeEntity bikeEntity) {
         return toBikeDTO(bikeService.addBike(bikeEntity));
@@ -64,8 +63,6 @@ public class BikeController {
                 .map(BikeController::toBikeDTO)
                 .collect(Collectors.toList());
     }
-
-
 
     static BikeDTO toBikeDTO(BikeEntity bikeEntity) {
         return new BikeDTO(

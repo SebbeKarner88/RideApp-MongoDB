@@ -10,11 +10,9 @@ public interface BikeRepository extends MongoRepository<BikeEntity, UUID> {
 
     List<BikeEntity> findByMaker(String maker);
     List<BikeEntity> findByModel(String model);
-
     //List<BikeEntity> findBySize(Sizes size);
     //List<BikeEntity> findByYear(Long year);
     List<BikeEntity> findByType(String type);
-
     //List<BikeEntity> findByColors(String color);
     //List<BikeEntity> findByMaterial(String material);
     //List<BikeEntity> findByWheelSize(Double wheelSize);

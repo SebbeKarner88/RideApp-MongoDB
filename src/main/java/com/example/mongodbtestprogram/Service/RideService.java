@@ -25,7 +25,9 @@ public class RideService {
     private final BikeRepository bikeRepository;
 
     @Autowired
-    public RideService(RideRepository rideRepository, UserRepository userRepository, BikeRepository bikeRepository) {
+    public RideService(RideRepository rideRepository,
+                       UserRepository userRepository,
+                       BikeRepository bikeRepository) {
         this.rideRepository = rideRepository;
         this.userRepository = userRepository;
         this.bikeRepository = bikeRepository;

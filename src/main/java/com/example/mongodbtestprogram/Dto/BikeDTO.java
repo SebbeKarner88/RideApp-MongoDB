@@ -10,7 +10,6 @@ import java.util.UUID;
 public class BikeDTO {
 
     UUID bikeId;
-
     String maker;
     String model;
     Sizes size;
