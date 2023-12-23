@@ -1,19 +1,19 @@
-import {IUser} from "../interfaces/IUser";
-import {IToken} from "../interfaces/IToken";
+import {ILogin} from "../interfaces/ILogin.ts";
+import {FieldValues} from "react-hook-form";
 
-const fetchApi = {
+ export const fetchApi = {
 
-    register: (user:IUser) => {
+    login: (login: FieldValues) => {
         return (
-            fetch("http://localhost:8080/api/auth/register", {
+            fetch("http://localhost:8080/api/auth/authenticate", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(user),
+                body: JSON.stringify(login),
             })
                 .then((response) => response.json())
-                .catch((e) => console.log(`Något blev fel ${e}`))
+                .catch((e) => console.log(`Could not fetch data ${e}`))
         );
     },
 }
