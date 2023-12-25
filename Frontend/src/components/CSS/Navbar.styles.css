@@ -4,12 +4,13 @@
 
 .burgerMenuLogo {
     color: rgb(180, 136, 68);
+    margin-left: 15px;
 }
 
 .burgermenu {
     font-family: 'Montserrat', sans-serif;
     font-weight: bolder;
-    font-size: 22px;
+    font-size: 20px;
     border-color: rgb(185, 139, 66);
 }
 

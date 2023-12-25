@@ -4,6 +4,7 @@ import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {fetchApi} from "../services/fetch.api.tsx";
 import {
+    Alert, AlertTitle,
     Box,
     Button,
     Container,
@@ -56,15 +57,18 @@ const Login = ({width, breakpoint}) => {
 
     const handleLogin = (data: FieldValues) => {
         fetchApi.login(data).then((token: IToken) => {
-            setShowMessage(true);
-            sessionStorage.setItem('token', token.token);
-            if (token.token !== '') {
-                setMessage(
-                    `Welcome!`
-                );
+            if (token.token.length > 50) {
                 setSuccess(true);
-            } else {
-                setMessage('ERROR');
+                sessionStorage.setItem('token', token.token);
+                window.location.reload();
+
+            } else if (token.token === 'Error 1'){
+                setMessage('Wrong username');
+                setShowMessage(true);
+                setSuccess(false);
+            } else if (token.token === 'Error 2'){
+                setMessage('Wrong password');
+                setShowMessage(true);
                 setSuccess(false);
             }
         });
@@ -83,6 +87,18 @@ const Login = ({width, breakpoint}) => {
 
     return (
         <>
+            {showMessage ? (
+                <Alert sx={outerBox} color="black" marginTop={10} status={success ? 'success' : 'error'}>
+                    {success ? (
+                        <AlertTitle>{message}</AlertTitle>
+                    ) : (
+                        <AlertTitle>{message}</AlertTitle>
+                    )}
+                </Alert>
+            ) : (
+                <div></div>
+            )}
+
             <Container
                 className='loginbox'
                 maxW='600px'
@@ -92,19 +108,6 @@ const Login = ({width, breakpoint}) => {
                 justifyContent='center'
                 alignContent='center'
             >
-                {showMessage ? (
-                    <Container
-                        marginTop={10}
-                        marginBottom={10}>
-                        {success ? (
-                            <span>{message}</span>
-                        ) : (
-                            <span>{message}</span>
-                        )}
-                    </Container>
-                ) : (
-                    <div></div>
-                )}
                 <form>
                     <FormLabel htmlFor='username' aria-required='true'>
                         Username
@@ -134,7 +137,6 @@ const Login = ({width, breakpoint}) => {
                             marginRight={1}
                             width='4.5rem'>
                             <Button h='1.75rem'
-                                    backgroundColor='darkgoldenrod'
                                     size='sm'
                                     onClick={handleClick}>
                                 {show ? 'Hide' : 'Show'}
