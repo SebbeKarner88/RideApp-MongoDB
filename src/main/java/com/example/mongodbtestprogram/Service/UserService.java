@@ -1,5 +1,7 @@
 package com.example.mongodbtestprogram.Service;
 
+import com.example.mongodbtestprogram.Dto.BikeDTO;
+import com.example.mongodbtestprogram.Entities.BikeEntity;
 import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,10 @@ public class UserService {
         )).orElse(null);
     }
 
+    public List<BikeEntity> getBikeCollectionByUserId(String userId) {
+        return userRepository.findById(UUID.fromString(userId)).get().getBikeCollection();
+    }
+
     public Boolean deleteById(UUID userId) {
 
         Optional<UserEntity> userOp = userRepository.findById(userId);
@@ -54,4 +60,5 @@ public class UserService {
         }
         return false;
     }
+
 }

@@ -60,8 +60,8 @@ const BikeDB = ({width, breakpoint}) => {
                                     <HStack
                                         justifyContent='center'>
                                         <Heading size='md'>{bike.maker}</Heading>
-                                        <Heading size='sm'>{bike.model}</Heading>
-                                        <Heading size='sm'>{bike.year}</Heading>
+                                        <Heading size='md'>{bike.model}</Heading>
+                                        <Heading size='md'>{bike.year}</Heading>
                                     </HStack>
                                     <HStack
                                         justifyContent='space-evenly'>

@@ -1,9 +1,25 @@
-.container {
+.mainContainer {
     height: 84vh;
+    width: 99vw;
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    color: #a67e3f;
+    font-family: 'Montserrat', sans-serif;
     justify-content: center;
     align-content: space-between;
+}
+
+.topContainer {
+    width: 98vw;
+    height: fit-content;
+    border: 2px solid black;
+
+}
+
+.bottomContainer {
+    width: 98vw;
+    height: fit-content;
+    border: 2px solid black;
 }

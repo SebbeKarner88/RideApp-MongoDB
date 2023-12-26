@@ -1,6 +1,8 @@
 package com.example.mongodbtestprogram.Controller;
 
+import com.example.mongodbtestprogram.Dto.BikeDTO;
 import com.example.mongodbtestprogram.Dto.UserDTO;
+import com.example.mongodbtestprogram.Entities.BikeEntity;
 import com.example.mongodbtestprogram.Entities.UserEntity;
 import com.example.mongodbtestprogram.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,14 @@ public class UserController {
         return toUserDTO(userService.getByUsername(username));
     }
 
+    @GetMapping("/getBikeCollectionByUserId")
+    public List<BikeDTO> getBikeCollectionByUserId(@RequestHeader String userId) {
+        return userService.getBikeCollectionByUserId(userId)
+                .stream()
+                .map(UserController::toBikeDTO)
+                .collect(Collectors.toList());
+    }
+
     @DeleteMapping("/deleteById")
     public Boolean deleteById(@RequestHeader UUID userId) {
         return userService.deleteById(userId);
@@ -54,6 +64,23 @@ public class UserController {
                 userEntity.getCountry(),
                 userEntity.getBikeCollection(),
                 userEntity.getUserRides());
+    }
+
+    static BikeDTO toBikeDTO(BikeEntity bikeEntity) {
+        return new BikeDTO(
+                bikeEntity.getBikeId(),
+                bikeEntity.getMaker(),
+                bikeEntity.getModel(),
+                bikeEntity.getSize(),
+                bikeEntity.getPictures(),
+                bikeEntity.getYear(),
+                bikeEntity.getType(),
+                bikeEntity.getColors(),
+                bikeEntity.getMaterial(),
+                bikeEntity.getWheelSize(),
+                bikeEntity.getGears(),
+                bikeEntity.getEBike()
+        );
     }
 
 }

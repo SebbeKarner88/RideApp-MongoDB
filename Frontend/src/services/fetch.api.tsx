@@ -1,5 +1,8 @@
-import {ILogin} from "../interfaces/ILogin.ts";
+
 import {FieldValues} from "react-hook-form";
+import {IGeoLocation} from "../interfaces/IGeoLocation.ts";
+import {IRide} from "../interfaces/IRide.ts";
+
 
  export const fetchApi = {
 
@@ -40,6 +43,54 @@ import {FieldValues} from "react-hook-form";
                      "userId": userId,
                      "Content-Type": "application/json",
                  },
+             })
+                 .then((response) => response.json())
+                 .catch((e) => console.log(`Could not fetch data ${e}`))
+         );
+     },
+
+     getBikeCollectionByUserId: (userId: string, auth: string) => {
+         return (
+             fetch("http://localhost:8080/user/getBikeCollectionByUserId", {
+                 method: "GET",
+                 headers: {
+                     "Authorization": "Bearer " + auth,
+                     "userId": userId,
+                     "Content-Type": "application/json",
+                 },
+             })
+                 .then((response) => response.json())
+                 .catch((e) => console.log(`Could not fetch data ${e}`))
+         );
+     },
+
+     startNewRide: (userId: string, bikeId: string, auth: string, rideEntity:IRide) => {
+         return (
+             fetch("http://localhost:8080/rides/add", {
+                 method: "POST",
+                 headers: {
+                     "Authorization": "Bearer " + auth,
+                     "userId": userId,
+                     "bikeId": bikeId,
+                     "Content-Type": "application/json",
+                 },
+                 body: JSON.stringify(rideEntity),
+             })
+                 .then((response) => response.json())
+                 .catch((e) => console.log(`Could not fetch data ${e}`))
+         );
+     },
+
+     addGeoLocCheckpoint: (auth: string, rideId: string, geoLoc: IGeoLocation) => {
+         return (
+             fetch("http://localhost:8080/rides/addCheckpoint", {
+                 method: "POST",
+                 headers: {
+                     "Authorization": "Bearer " + auth,
+                     "rideId": rideId,
+                     "Content-Type": "application/json",
+                 },
+                 body: JSON.stringify(geoLoc),
              })
                  .then((response) => response.json())
                  .catch((e) => console.log(`Could not fetch data ${e}`))
