@@ -67,13 +67,6 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
-         //authenticationManager.authenticate(
-              //new UsernamePasswordAuthenticationToken(
-               //         request.getUsername(),
-             //          request.getPassword() // BEHÖVER AVKODAS MED BCRYPT?
-           //     )
-         //);
-
         Optional<UserEntity> user = userRepository.findByUsername(request.getUsername());
 
         if (user.isPresent()) {
@@ -85,6 +78,7 @@ public class AuthenticationService {
                 return AuthenticationResponse
                         .builder()
                         .token(jwtToken)
+                        .userId(String.valueOf(user.get().getUserId()))
                         .build();
             }
 

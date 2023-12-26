@@ -6,6 +6,7 @@ import com.example.mongodbtestprogram.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -26,6 +27,11 @@ public class UserController {
                 .stream()
                 .map(UserController::toUserDTO)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/getByUsername")
+    public UserDTO getById(@RequestHeader String username) {
+        return toUserDTO(userService.getByUsername(username));
     }
 
     @DeleteMapping("/deleteById")

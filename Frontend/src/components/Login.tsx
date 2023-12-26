@@ -14,7 +14,7 @@ import {
     InputRightElement
 } from "@chakra-ui/react";
 import './CSS/Login.styles.css'
-import {IToken} from "../interfaces/IToken.ts";
+import {IAuthResponse} from "../interfaces/IAuthResponse.ts";
 
 const Login = ({width, breakpoint}) => {
     const [show, setShow] = useState(false);
@@ -56,10 +56,11 @@ const Login = ({width, breakpoint}) => {
     };
 
     const handleLogin = (data: FieldValues) => {
-        fetchApi.login(data).then((token: IToken) => {
+        fetchApi.login(data).then((token: IAuthResponse) => {
             if (token.token.length > 50) {
                 setSuccess(true);
                 sessionStorage.setItem('token', token.token);
+                sessionStorage.setItem('userId', token.userId)
                 window.location.reload();
 
             } else if (token.token === 'Error 1'){

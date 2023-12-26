@@ -24,6 +24,26 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public UserEntity getByUsername(String username) {
+        Optional<UserEntity> user = userRepository.findByUsername(username);
+        return user.map(userEntity -> new UserEntity(
+                userEntity.getUserId(),
+                userEntity.getUsername(),
+                userEntity.getPassword(),
+                userEntity.getRole(),
+                userEntity.getFirstName(),
+                userEntity.getLastName(),
+                userEntity.getPhoneNumber(),
+                userEntity.getStreet(),
+                userEntity.getStreetNumber(),
+                userEntity.getZipCode(),
+                userEntity.getCity(),
+                userEntity.getCountry(),
+                userEntity.getBikeCollection(),
+                userEntity.getUserRides()
+        )).orElse(null);
+    }
+
     public Boolean deleteById(UUID userId) {
 
         Optional<UserEntity> userOp = userRepository.findById(userId);

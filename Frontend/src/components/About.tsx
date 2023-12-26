@@ -1,5 +1,5 @@
 import React from 'react';
-import'./CSS/About.styles.css'
+import './CSS/About.styles.css'
 import {Box, Container} from "@chakra-ui/react";
 
 const About = ({width, breakpoint}) => {
@@ -16,12 +16,17 @@ const About = ({width, breakpoint}) => {
                 <Box className='about'>
                     <section className='information'>
                         <div>
-                            SEJOLI AB is a company that values creativity, laughter, coding
-                            skills and pushing for success. No idea is a bad idea.
+                            RideApp is a Master Thesis project developed by Sebastian Kärner, a Java
+                            developer student at EC Education in Stockholm, Sweden.
                             <br/>
                             <br/>
-                            Our motto is:
-                            <strong>"It is just beepity baapity boopity"</strong>.
+                            <i>"My passion for cycling inspired me to develop this application.
+                                <br/>
+                                Though there are many apps like this out there,<br/>
+                                I wanted to make a GPS tracker from scratch, not by using a service."</i>
+                            <br/>
+                            <br/>
+                            <strong>/ Sebastian Kärner</strong>.
                         </div>
                     </section>
                 </Box>
