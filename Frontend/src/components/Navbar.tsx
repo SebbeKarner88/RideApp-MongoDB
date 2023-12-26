@@ -47,7 +47,7 @@ const NavBar = ({width, breakpoint}) => {
                             <MenuItem
                                 backgroundColor='#0000005A'
                                 justifyContent={"center"}>
-                                <Link className='navBikeDB' to={'bikeDB'}>Bicycle DB</Link>
+                                <Link className='navBikeDB' to={'bikeDB'}>Bike-DB</Link>
                             </MenuItem>
                             <MenuItem
                                 backgroundColor='#0000005A'
@@ -86,7 +86,7 @@ const NavBar = ({width, breakpoint}) => {
                     paddingRight={13}>
                 {loggedIn ? (
                     <>
-                        <Link className='navBikeDB' to={'bikeDB'}>Bicycle DB</Link>
+                        <Link className='navBikeDB' to={'bikeDB'}>Bike-DB</Link>
                         <Link className='navRide' to={'ride'}>Ride</Link>
                     </>
                 ) : (

@@ -73,8 +73,8 @@ public class RideService {
         return null;
     }
 
-    public List<RideEntity> getAllByUser(String username) {
-        List<RideEntity> rides = rideRepository.findRideEntitiesByUser_Username(username);
+    public List<RideEntity> getAllByUserId(String userId) {
+        List<RideEntity> rides = rideRepository.findRideEntitiesByUser_UserId(userId);
 
         if (rides.isEmpty())
             return null;

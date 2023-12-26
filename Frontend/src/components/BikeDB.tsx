@@ -10,6 +10,8 @@ import React, {useEffect, useState} from "react"
 import {fetchApi} from "../services/fetch.api.tsx"
 import {IBike} from "../interfaces/IBike.ts"
 import "./CSS/BikeDB.styles.css"
+import {Simulate} from "react-dom/test-utils";
+import blur = Simulate.blur;
 
 const BikeDB = ({width, breakpoint}) => {
 
@@ -28,13 +30,23 @@ const BikeDB = ({width, breakpoint}) => {
     return (
         <>
             <div
-                className='container'
-            >
+                className='container'>
                 {loaded ?
                     bikeList.map((bike: IBike, index) => (
                         <Card
                             key={index}
-                            className='bikeListCard'
+                            marginTop={2}
+                            style={{
+                                backgroundColor: 'rgba(17, 17, 17, 0.8)',
+                                backdropFilter: 'blur(11px)',
+                                borderStyle: 'solid',
+                                borderWidth: '2px',
+                                borderColor: 'A67E3FC1',
+                                borderRadius: '15px',
+                                color: '#a67e3f',
+                                fontFamily: 'Montserrat, sans-serif',
+                                fontSize: '19px'
+                            }}
                             width='350px'>
                             <CardBody>
                                 <Stack
@@ -53,19 +65,19 @@ const BikeDB = ({width, breakpoint}) => {
                                     </HStack>
                                     <HStack
                                         justifyContent='space-evenly'>
-                                        <div><strong>Frame:</strong> {bike.material}</div>
-                                        <div><strong>Type:</strong> {bike.type}</div>
+                                        <div><strong>Frame: </strong> {bike.material}</div>
+                                        <div><strong>Type: </strong> {bike.type}</div>
                                     </HStack>
                                     <Divider/>
                                     <HStack
                                         justifyContent='space-evenly'>
-                                        <div><strong>Gears:</strong> {bike.gears}</div>
-                                        <div><strong>Wheelsize:</strong> {bike.wheelSize}"</div>
+                                        <div><strong>Gears: </strong> {bike.gears}</div>
+                                        <div><strong>Wheelsize: </strong> {bike.wheelSize}"</div>
                                     </HStack>
                                     <Divider/>
                                     <HStack
                                         justifyContent='space-evenly'>
-                                        <div><strong>Color:</strong> {bike.colors.map(color => color + " ")}</div>
+                                        <div><strong>Color: </strong> {bike.colors.map(color => color + " ")}</div>
                                     </HStack>
                                     <Divider/>
                                 </Stack>
@@ -75,10 +87,14 @@ const BikeDB = ({width, breakpoint}) => {
                                     <HStack
                                         justifyContent='space-evenly'>
                                         {bike.pictures.map(pic => (
-                                            <div>
+                                            <Stack
+                                                className='imgBackground'
+                                                width='100px'
+                                                marginTop={1}
+                                                overflow='hidden'>
                                                 <Image src={pic}
-                                                       height='70px'></Image>
-                                            </div>
+                                                       height='auto'></Image>
+                                            </Stack>
                                         ))}
                                     </HStack>
                                 </Stack>
@@ -94,6 +110,7 @@ const BikeDB = ({width, breakpoint}) => {
                         size='xl'
                     />
                 }
+
             </div>
         </>
     );

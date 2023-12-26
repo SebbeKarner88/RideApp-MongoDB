@@ -30,4 +30,19 @@ import {FieldValues} from "react-hook-form";
                  .catch((e) => console.log(`Could not fetch data ${e}`))
          );
      },
+
+     getAllRides: (userId: string, auth: string) => {
+         return (
+             fetch("http://localhost:8080/rides/getAllByUserId", {
+                 method: "GET",
+                 headers: {
+                     "Authorization": "Bearer " + auth,
+                     "userId": userId,
+                     "Content-Type": "application/json",
+                 },
+             })
+                 .then((response) => response.json())
+                 .catch((e) => console.log(`Could not fetch data ${e}`))
+         );
+     },
 }

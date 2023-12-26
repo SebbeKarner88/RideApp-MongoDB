@@ -43,9 +43,9 @@ public class RideController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/getAllByUser")
-    public List<RideDTO> getAllByUser(@RequestHeader String username) {
-        return rideService.getAllByUser(username)
+    @GetMapping("/getAllByUserId")
+    public List<RideDTO> getAllByUserId(@RequestHeader String userId) {
+        return rideService.getAllByUserId(userId)
                 .stream()
                 .map(RideController::toRideDTO)
                 .collect(Collectors.toList());

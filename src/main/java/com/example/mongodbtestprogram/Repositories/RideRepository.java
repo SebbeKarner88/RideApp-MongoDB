@@ -10,5 +10,6 @@ import java.util.UUID;
 public interface RideRepository extends MongoRepository<RideEntity, UUID> {
 
     List<RideEntity> findRideEntitiesByUser_Username(String username);
+    List<RideEntity> findRideEntitiesByUser_UserId(String userId);
 
 }
