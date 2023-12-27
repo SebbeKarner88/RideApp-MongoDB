@@ -1,8 +1,7 @@
 import {
     Button,
     Card,
-    CardBody, CardFooter,
-    Container,
+    CardBody,
     Divider,
     Heading,
     HStack,
@@ -11,7 +10,6 @@ import {
     Stack,
     VStack
 } from "@chakra-ui/react";
-import GoogleMapReact from 'google-map-react';
 import React, {useEffect, useState} from "react";
 import {IRide} from "../interfaces/IRide.ts";
 import "./CSS/Ride.styles.css"
@@ -102,63 +100,65 @@ const Ride = ({width, breakpoint}) => {
                     <div
                         className='topContainer'
                     >
-                        {bikesLoaded ?
-                            bikeList.map((bike: IBike, index) => (
-                                <Card
-                                    key={index}
-                                    style={{
-                                        marginTop: '10px',
-                                        backgroundColor: 'rgba(17, 17, 17, 0.8)',
-                                        backdropFilter: 'blur(11px)',
-                                        borderStyle: 'solid',
-                                        borderWidth: '2px',
-                                        borderColor: 'A67E3FC1',
-                                        borderRadius: '15px',
-                                        color: '#a67e3f',
-                                        fontFamily: 'Montserrat, sans-serif',
-                                        fontSize: '19px'
-                                    }}
-                                    width='300px'>
-                                    <CardBody>
-                                        <Stack
-                                            className='imgBackground'
-                                            height='170px'
-                                            overflow='hidden'>
-                                            <Image
-                                                src={bike.pictures[0]}></Image>
-                                        </Stack>
-                                        <Stack mt='3' spacing='3'>
-                                            <HStack
-                                                justifyContent='center'>
-                                                <Heading size='md'>{bike.maker}</Heading>
-                                                <Heading size='md'>{bike.model}</Heading>
-                                                <Heading size='md'>{bike.year}</Heading>
-                                            </HStack>
-                                        </Stack>
-                                        <Divider marginTop={2}/>
-                                        <Stack>
-                                            {ongoingRide ?
-                                                <Button
-                                                    marginTop={4}
-                                                    onClick={() => stopRide()}>Stop</Button>
-                                                :
-                                                <Button
-                                                    marginTop={4}
-                                                    onClick={() => startNewRide(bike.bikeId)}>Start</Button>
-                                            }
-                                        </Stack>
-                                    </CardBody>
-                                </Card>
-                            ))
-                            :
-                            <Spinner
-                                thickness='4px'
-                                speed='0.55s'
-                                emptyColor='gray.200'
-                                color='#a67e3f'
-                                size='xl'
-                            />
-                        }
+                        <HStack className='ownedBikes'>
+                            {bikesLoaded ?
+                                bikeList.map((bike: IBike, index) => (
+                                    <Card
+                                        key={index}
+                                        style={{
+                                            marginTop: '10px',
+                                            backgroundColor: 'rgba(17, 17, 17, 0.8)',
+                                            backdropFilter: 'blur(11px)',
+                                            borderStyle: 'solid',
+                                            borderWidth: '2px',
+                                            borderColor: 'A67E3FC1',
+                                            borderRadius: '15px',
+                                            color: '#a67e3f',
+                                            fontFamily: 'Montserrat, sans-serif',
+                                            fontSize: '19px'
+                                        }}
+                                        width='300px'>
+                                        <CardBody>
+                                            <Stack
+                                                className='imgBackground'
+                                                height='170px'
+                                                overflow='hidden'>
+                                                <Image
+                                                    src={bike.pictures[0]}></Image>
+                                            </Stack>
+                                            <Stack mt='3' spacing='3'>
+                                                <HStack
+                                                    justifyContent='center'>
+                                                    <Heading size='md'>{bike.maker}</Heading>
+                                                    <Heading size='md'>{bike.model}</Heading>
+                                                    <Heading size='md'>{bike.year}</Heading>
+                                                </HStack>
+                                            </Stack>
+                                            <Divider marginTop={2}/>
+                                            <Stack>
+                                                {ongoingRide ?
+                                                    <Button
+                                                        marginTop={4}
+                                                        onClick={() => stopRide()}>Stop</Button>
+                                                    :
+                                                    <Button
+                                                        marginTop={4}
+                                                        onClick={() => startNewRide(bike.bikeId)}>Start</Button>
+                                                }
+                                            </Stack>
+                                        </CardBody>
+                                    </Card>
+                                ))
+                                :
+                                <Spinner
+                                    thickness='4px'
+                                    speed='0.55s'
+                                    emptyColor='gray.200'
+                                    color='#a67e3f'
+                                    size='xl'
+                                />
+                            }
+                        </HStack>
                     </div>
                     <Divider
                         marginTop='40px'
