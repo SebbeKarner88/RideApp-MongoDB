@@ -1,7 +1,7 @@
 import {
     Button,
     Card,
-    CardBody,
+    CardBody, CardFooter,
     Container,
     Divider,
     Heading,
@@ -11,12 +11,14 @@ import {
     Stack,
     VStack
 } from "@chakra-ui/react";
+import GoogleMapReact from 'google-map-react';
 import React, {useEffect, useState} from "react";
 import {IRide} from "../interfaces/IRide.ts";
 import "./CSS/Ride.styles.css"
 import {fetchApi} from "../services/fetch.api.tsx";
 import {IBike} from "../interfaces/IBike.ts";
 import {IGeoLocation} from "../interfaces/IGeoLocation.ts";
+import MapComponent from "./MapComponent.tsx";
 
 
 const Ride = ({width, breakpoint}) => {
@@ -28,7 +30,6 @@ const Ride = ({width, breakpoint}) => {
     const [longNumber, setLongNumber] = useState<number>(0)
     const [currentRide, setCurrentRide] = useState<IRide>()
     const [ongoingRide, setOngoingRide] = useState(false)
-    let rideInterval: number | undefined;
 
     useEffect(() => {
         getLocation();
@@ -81,31 +82,32 @@ const Ride = ({width, breakpoint}) => {
         fetchApi.startNewRide(sessionStorage.getItem('userId'), bikeId, sessionStorage.getItem('token'), rideEntity).then((ride: IRide) => {
             setOngoingRide(true)
             setCurrentRide(ride)
-            rideInterval = setInterval(() => addCheckpoint(ride.rideId), 5000)
+            const rideInterval = setInterval(() => addCheckpoint(ride.rideId), 10000);
         })
     }
 
     function stopRide() {
-        clearInterval(rideInterval); // TODO FUNKAR INTE!
-        window.location.reload();
         setOngoingRide(false);
+        window.location.reload();
     }
 
     return (
         <>
             <div
                 className='mainContainer'>
+                <Heading
+                    className='rideHeading'
+                    marginTop={3}>Start a new Ride</Heading>
                 <VStack>
                     <div
                         className='topContainer'
                     >
-                        <Heading>Start a new Ride</Heading>
                         {bikesLoaded ?
                             bikeList.map((bike: IBike, index) => (
                                 <Card
                                     key={index}
-                                    marginTop={2}
                                     style={{
+                                        marginTop: '10px',
                                         backgroundColor: 'rgba(17, 17, 17, 0.8)',
                                         backdropFilter: 'blur(11px)',
                                         borderStyle: 'solid',
@@ -158,12 +160,72 @@ const Ride = ({width, breakpoint}) => {
                             />
                         }
                     </div>
+                    <Divider
+                        marginTop='40px'
+                        borderColor={'darkgoldenrod'}
+                        borderWidth='5px'/>
+                    <Heading
+                        className='rideHeading'
+                        marginTop={3}>Ride History</Heading>
                     <div
                         className='bottomContainer'>
                         {ridesLoaded ?
                             rideList.map((ride: IRide, index) => (
                                 <>
-                                    <div key={index}> {ride.rideId} </div>
+                                    <Card
+                                        direction={{base: 'column', sm: 'row'}}
+                                        overflow='hidden'
+                                        variant='outline'
+                                        key={index}
+                                        style={{
+                                            marginTop: '20px',
+                                            backgroundColor: 'rgba(17, 17, 17, 0.8)',
+                                            backdropFilter: 'blur(11px)',
+                                            borderStyle: 'solid',
+                                            borderWidth: '2px',
+                                            borderColor: 'darkgoldenrod',
+                                            borderRadius: '15px',
+                                            color: '#a67e3f',
+                                            fontFamily: 'Montserrat, sans-serif',
+                                            fontSize: '19px'
+                                        }}
+                                    >
+                                        <MapComponent coordinatesList={ride.locCheckpoints}/>
+                                        <Stack>
+                                            <CardBody
+                                                margin={3}>
+                                                <Heading
+                                                    size='lg'
+                                                    marginBottom={6}>{ride.bike.maker} {ride.bike.model}</Heading>
+                                                <Divider
+                                                    borderColor='darkgoldenrod'/>
+                                                <HStack marginTop={3}>
+                                                    <div><strong>Start time: </strong> {ride.startTime}</div>
+                                                    <div><strong> | </strong></div>
+                                                    <div><strong>Finish time: </strong> {ride.startTime}</div>
+                                                </HStack>
+                                                <Divider
+                                                    borderColor='darkgoldenrod'/>
+                                                <HStack marginTop={3}>
+                                                    <div><strong>Length: </strong> {ride.rideLengthKM} Km</div>
+                                                    <div><strong> | </strong></div>
+                                                    <div><strong>Elapsed time: </strong> {ride.rideDuration}</div>
+                                                    <div><strong> | </strong></div>
+                                                    <div><strong>Average speed: </strong> {ride.avgSpeedKMT} Km/t</div>
+                                                </HStack>
+                                                <Divider
+                                                    borderColor='darkgoldenrod'/>
+                                                <HStack marginTop={3}>
+                                                    <div>
+                                                        <strong>Rider: </strong> {ride.user.firstName} {ride.user.lastName}
+                                                    </div>
+                                                    <div><strong> | </strong></div>
+                                                    <div><strong>Rides
+                                                        recorded: </strong> {ride.user.userRides.length + 1}</div>
+                                                </HStack>
+                                            </CardBody>
+                                        </Stack>
+                                    </Card>
                                 </>
                             ))
                             :

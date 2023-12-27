@@ -4,7 +4,7 @@
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
     color: #a67e3f;
     font-family: 'Montserrat', sans-serif;
     justify-content: center;
@@ -12,14 +12,24 @@
 }
 
 .topContainer {
-    width: 98vw;
+    width: 96vw;
     height: fit-content;
-    border: 2px solid black;
-
+    margin-left: 5px;
 }
 
 .bottomContainer {
-    width: 98vw;
+    width: 96vw;
     height: fit-content;
-    border: 2px solid black;
+    margin-left: 10px;
+}
+
+.rideHeading {
+    padding: 20px;
+    color: #a67e3f;
+    font-family: 'Montserrat', sans-serif;
+    justify-content: center;
+    align-content: space-between;
+    border: 2px solid #a67e3f;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.81);
 }
