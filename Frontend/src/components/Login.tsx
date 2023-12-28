@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {FieldValues, useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import './CSS/Login.styles.css'
 import {IAuthResponse} from "../interfaces/IAuthResponse.ts";
+import {Link} from "react-router-dom";
 
 const Login = ({width, breakpoint}) => {
     const [show, setShow] = useState(false);
@@ -39,21 +40,6 @@ const Login = ({width, breakpoint}) => {
         handleSubmit,
         formState: {errors, isValid},
     } = useForm<FormData>({resolver: zodResolver(schema)});
-
-    const handleRegister = (data: FieldValues) => {
-        // userService
-        //     .add(undefined, data)
-        //     .then(() => {
-        //         setShowMessage(true);
-        //         setMessage('Successfully registered to the magic');
-        //         setSuccess(true);
-        //     })
-        //     .catch(() => {
-        //         setShowMessage(true);
-        //         setMessage('Unable to register');
-        //         setSuccess(false);
-        //     });
-    };
 
     const handleLogin = (data: FieldValues) => {
         fetchApi.login(data).then((token: IAuthResponse) => {
@@ -159,19 +145,17 @@ const Login = ({width, breakpoint}) => {
                         >
                             Login
                         </Button>
-                        <Button
-                            marginTop={4}
-                            width={'150px'}
-                            color='A67E3FFF'
-                            outlineColor='darkgoldenrod'
-                            variant='unstyled'
-                            fontSize={15}
-                            disabled={true}
-                            type='submit'
-                            onClick={handleSubmit(handleRegister)}
-                        >
-                            Register
-                        </Button>
+                        <Link to={'/register'}>
+                            <Button
+                                marginTop={4}
+                                width={'150px'}
+                                color='A67E3FFF'
+                                outlineColor='darkgoldenrod'
+                                variant='unstyled'
+                                fontSize={15}>
+                                Register
+                            </Button>
+                        </Link>
                     </Box>
                 </form>
             </Container>

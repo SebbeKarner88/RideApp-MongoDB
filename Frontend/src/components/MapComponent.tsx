@@ -1,17 +1,20 @@
 import React from 'react';
+// @ts-ignore
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+// @ts-ignore
 const MapComponent = ({ coordinatesList }) => {
 
+    // @ts-ignore
     const polylinePositions = coordinatesList.map(({ latitude, longitude }) => [latitude, longitude]);
 
     const customIcon = new L.Icon({
-        iconUrl: 'https://icon-library.com/images/mountain-bike-icon/mountain-bike-icon-7.jpg', // Replace with the path to your custom icon
-        iconSize: [32, 32], // Adjust the size of your icon
-        iconAnchor: [16, 32], // Adjust the anchor point of your icon
-        popupAnchor: [0, -32], // Adjust the popup anchor of your icon
+        iconUrl: 'https://icon-library.com/images/mountain-bike-icon/mountain-bike-icon-7.jpg',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32],
     });
 
     return (

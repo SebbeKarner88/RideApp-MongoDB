@@ -3,6 +3,7 @@ import {HStack, Image} from "@chakra-ui/react";
 import logo from '../assets/images/RideApp-cropped-logo.webp'
 import './CSS/Landing.styles.css'
 
+// @ts-ignore
 const Landing = ({width, breakpoint}) => {
 
     return (

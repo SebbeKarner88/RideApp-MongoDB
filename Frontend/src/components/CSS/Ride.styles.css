@@ -42,3 +42,14 @@
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.81);
 }
+
+.errorHeading {
+    padding: 20px;
+    color: #850606;
+    font-family: 'Montserrat', sans-serif;
+    justify-content: center;
+    align-content: space-between;
+    border: 2px solid #800505;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.81);
+}

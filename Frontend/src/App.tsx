@@ -13,6 +13,7 @@ import React, {useState} from "react";
 import Login from "./components/Login";
 import BikeDB from "./components/BikeDB";
 import Ride from "./components/Ride.tsx";
+import Register from "./components/Register.tsx";
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
                                 <Route path='/login' element={<Login breakpoint={breakpoint} width={width}/>}/>
                                 <Route path='/bikeDB' element={<BikeDB breakpoint={breakpoint} width={width}/>}/>
                                 <Route path='/ride' element={<Ride breakpoint={breakpoint} width={width}/>}/>
+                                <Route path='/register' element={<Register breakpoint={breakpoint} width={width}/>}/>
                             </Routes>
                         </GridItem>
                         <GridItem area={'footer'}>

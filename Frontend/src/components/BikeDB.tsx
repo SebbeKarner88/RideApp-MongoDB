@@ -10,7 +10,6 @@ import React, {useEffect, useState} from "react"
 import {fetchApi} from "../services/fetch.api.tsx"
 import {IBike} from "../interfaces/IBike.ts"
 import "./CSS/BikeDB.styles.css"
-import {Simulate} from "react-dom/test-utils";
 
 const BikeDB = ({width, breakpoint}) => {
 

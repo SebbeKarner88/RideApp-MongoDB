@@ -33,14 +33,17 @@ const Ride = ({width, breakpoint}) => {
         getLocation();
         // @ts-ignore
         fetchApi.getAllRides(sessionStorage.getItem('userId'), sessionStorage.getItem('token')).then((rides: IRide[]) => {
-            setRideList(rides);
-            setRidesLoaded(true);
-
+            if (rides.length > 0) {
+                setRidesLoaded(true);
+                setRideList(rides);
+            }
         });
         // @ts-ignore
         fetchApi.getBikeCollectionByUserId(sessionStorage.getItem('userId'), sessionStorage.getItem('token')).then((bikes: IBike[]) => {
-            setBikeList(bikes);
-            setBikesLoaded(true);
+            if (bikes.length > 0) {
+                setBikesLoaded(true);
+                setBikeList(bikes);
+            }
         });
     }, []);
 
@@ -93,9 +96,14 @@ const Ride = ({width, breakpoint}) => {
         <>
             <div
                 className='mainContainer'>
-                <Heading
-                    className='rideHeading'
-                    marginTop={3}>Start a new Ride</Heading>
+                {bikesLoaded ?
+                    <Heading
+                        className='rideHeading'
+                        marginTop={3}>Start a new Ride</Heading>
+                    :
+                    <Heading
+                        className='errorHeading'
+                        marginTop={3}>No bikes in collection</Heading>}
                 <VStack>
                     <div
                         className='topContainer'
@@ -143,20 +151,13 @@ const Ride = ({width, breakpoint}) => {
                                                     :
                                                     <Button
                                                         marginTop={4}
-                                                        onClick={() => startNewRide(bike.bikeId)}>Start</Button>
-                                                }
+                                                        onClick={() => startNewRide(bike.bikeId)}>Start</Button>}
                                             </Stack>
                                         </CardBody>
                                     </Card>
                                 ))
                                 :
-                                <Spinner
-                                    thickness='4px'
-                                    speed='0.55s'
-                                    emptyColor='gray.200'
-                                    color='#a67e3f'
-                                    size='xl'
-                                />
+                                <div></div>
                             }
                         </HStack>
                     </div>
@@ -164,9 +165,14 @@ const Ride = ({width, breakpoint}) => {
                         marginTop='40px'
                         borderColor={'darkgoldenrod'}
                         borderWidth='5px'/>
-                    <Heading
-                        className='rideHeading'
-                        marginTop={3}>Ride History</Heading>
+                    {bikesLoaded ?
+                        <Heading
+                            className='rideHeading'
+                            marginTop={3}>Ride History</Heading>
+                        :
+                        <Heading
+                            className='errorHeading'
+                            marginTop={3}>No Rides in collection</Heading>}
                     <div
                         className='bottomContainer'>
                         {ridesLoaded ?
@@ -211,7 +217,8 @@ const Ride = ({width, breakpoint}) => {
                                                     <div><strong> | </strong></div>
                                                     <div><strong>Elapsed time: </strong> {ride.rideDuration}</div>
                                                     <div><strong> | </strong></div>
-                                                    <div><strong>Average speed: </strong> {ride.avgSpeedKMT} Km/t</div>
+                                                    <div><strong>Average speed: </strong> {ride.avgSpeedKMT} Km/t
+                                                    </div>
                                                 </HStack>
                                                 <Divider
                                                     borderColor='darkgoldenrod'/>
@@ -229,13 +236,7 @@ const Ride = ({width, breakpoint}) => {
                                 </>
                             ))
                             :
-                            <Spinner
-                                thickness='4px'
-                                speed='0.55s'
-                                emptyColor='gray.200'
-                                color='#a67e3f'
-                                size='xl'
-                            />
+                            <div></div>
                         }
                     </div>
                 </VStack>

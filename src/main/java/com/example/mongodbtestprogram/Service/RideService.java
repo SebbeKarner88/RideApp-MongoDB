@@ -74,12 +74,7 @@ public class RideService {
     }
 
     public List<RideEntity> getAllByUserId(String userId) {
-        List<RideEntity> rides = rideRepository.findRideEntitiesByUser_UserId(userId);
-
-        if (rides.isEmpty())
-            return null;
-
-        return rides;
+        return rideRepository.findRideEntitiesByUser_UserId(userId);
     }
 
     public Boolean deleteById(UUID rideId) {
