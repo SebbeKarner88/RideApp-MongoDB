@@ -125,7 +125,7 @@ const Ride = ({width, breakpoint}) => {
                                             fontFamily: 'Montserrat, sans-serif',
                                             fontSize: '19px'
                                         }}
-                                        width='300px'>
+                                        width='320px'>
                                         <CardBody>
                                             <Stack
                                                 className='imgBackground'

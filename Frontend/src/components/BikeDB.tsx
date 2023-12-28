@@ -4,7 +4,7 @@ import {
     Stack,
     Heading,
     Divider,
-    Image, HStack, Spinner,
+    Image, HStack, Spinner, Button,
 } from '@chakra-ui/react'
 import React, {useEffect, useState} from "react"
 import {fetchApi} from "../services/fetch.api.tsx"
@@ -14,22 +14,38 @@ import "./CSS/BikeDB.styles.css"
 const BikeDB = ({width, breakpoint}) => {
 
     const [bikeList, setBikeList] = useState<IBike[]>([]);
-    const [loaded, setLoaded] = useState(false)
+    const [userBikeList, setUserBikeList] = useState<IBike[]>([]);
+    const [dbLoaded, setDbLoaded] = useState(false)
+    const [userLoaded, setUserLoaded] = useState(false)
 
     useEffect(() => {
         // @ts-ignore
         fetchApi.getAllBikes(sessionStorage.getItem('token')).then((bikes: IBike[]) => {
             setBikeList(bikes);
-            setLoaded(true);
+            setDbLoaded(true);
+        });
+        // @ts-ignore
+        fetchApi.getBikeCollectionByUserId(sessionStorage.getItem('userId'), sessionStorage.getItem('token')).then((bikes: IBike[]) => {
+            setUserBikeList(bikes);
+            setUserLoaded(true);
         });
     }, []);
 
+
+    function addBike(bike:IBike) {
+
+        // @ts-ignore
+        fetchApi.addBikeToCollection(sessionStorage.getItem('userId'), sessionStorage.getItem('token'), bike).then((bike: IBike) => {
+            window.location.reload()
+        })
+
+    }
 
     return (
         <>
             <div
                 className='container'>
-                {loaded ?
+                {dbLoaded ?
                     bikeList.map((bike: IBike, index) => (
                         <Card
                             key={index}
@@ -61,6 +77,21 @@ const BikeDB = ({width, breakpoint}) => {
                                         <Heading size='md'>{bike.model}</Heading>
                                         <Heading size='md'>{bike.year}</Heading>
                                     </HStack>
+                                    {userBikeList.find((uBike) => uBike.bikeId === bike.bikeId) ?
+                                        <Button
+                                            className='addButton'
+                                            variant={"unstyled"}
+                                            disabled={true}>
+                                            In Collection
+                                        </Button>
+                                        :
+                                        <Button
+                                            className='addButton'
+                                            variant={"unstyled"}
+                                            onClick={() => addBike(bike)}>
+                                            Add to Collection
+                                        </Button>
+                                    }
                                     <HStack
                                         justifyContent='space-evenly'>
                                         <div><strong>Frame: </strong> {bike.material}</div>
@@ -80,7 +111,7 @@ const BikeDB = ({width, breakpoint}) => {
                                     <Divider/>
                                 </Stack>
                                 <Divider/>
-                                <Stack mt='3' spacing='3'>
+                                <Stack mt='3' mb='3' spacing='3'>
                                     <Heading size='md'>More pictures</Heading>
                                     <HStack
                                         justifyContent='space-evenly'>
@@ -91,7 +122,9 @@ const BikeDB = ({width, breakpoint}) => {
                                                 marginTop={1}
                                                 overflow='hidden'>
                                                 <Image src={pic}
-                                                       height='auto'></Image>
+                                                       height='auto'>
+
+                                                </Image>
                                             </Stack>
                                         ))}
                                     </HStack>

@@ -2,6 +2,7 @@
 import {FieldValues} from "react-hook-form";
 import {IGeoLocation} from "../interfaces/IGeoLocation.ts";
 import {IRide} from "../interfaces/IRide.ts";
+import {IBike} from "../interfaces/IBike.ts";
 
 
  export const fetchApi = {
@@ -105,6 +106,22 @@ import {IRide} from "../interfaces/IRide.ts";
                      "Content-Type": "application/json",
                  },
                  body: JSON.stringify(geoLoc),
+             })
+                 .then((response) => response.json())
+                 .catch((e) => console.log(`Could not fetch data ${e}`))
+         );
+     },
+
+     addBikeToCollection: (userId: string, auth: string, bike:IBike) => {
+         return (
+             fetch("http://localhost:8080/bike/addToBikeCollection", {
+                 method: "POST",
+                 headers: {
+                     "Authorization": "Bearer " + auth,
+                     "userId": userId,
+                     "Content-Type": "application/json",
+                 },
+                 body: JSON.stringify(bike),
              })
                  .then((response) => response.json())
                  .catch((e) => console.log(`Could not fetch data ${e}`))
