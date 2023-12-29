@@ -115,8 +115,8 @@ const Ride = ({width, breakpoint}) => {
                                         key={index}
                                         style={{
                                             marginTop: '10px',
-                                            backgroundColor: 'rgba(17, 17, 17, 0.8)',
-                                            backdropFilter: 'blur(11px)',
+                                            backgroundColor: 'rgba(0, 0, 0, 0.92)',
+                                            backdropFilter: 'blur(3px)',
                                             borderStyle: 'solid',
                                             borderWidth: '2px',
                                             borderColor: 'A67E3FC1',
