@@ -1,7 +1,7 @@
 .loginbox {
     margin-top: 40px;
-    background-color: rgba(0, 0, 0, 0.71);
-    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(3px);
     border: 5px ridge rgba(166, 126, 63, 0.76);
     border-radius: 15px;
     padding: 25px;

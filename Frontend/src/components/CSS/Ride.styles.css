@@ -26,6 +26,11 @@
     align-content: space-between;
 }
 
+.startButton {
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #a67e3f;
+}
+
 .bottomContainer {
     width: 96vw;
     height: fit-content;

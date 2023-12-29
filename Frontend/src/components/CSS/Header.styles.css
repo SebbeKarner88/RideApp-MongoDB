@@ -1,7 +1,7 @@
 .headerBox {
-    background-color: rgba(0, 0, 0, 0.78);
+    background-color: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(3px);
     border-bottom: 2px Solid rgba(166, 126, 63, 0.76);
-    backdrop-filter: blur(2px);
     color: rgb(166, 126, 63);
 }
 

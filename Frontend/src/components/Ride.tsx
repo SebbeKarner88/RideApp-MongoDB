@@ -150,7 +150,9 @@ const Ride = ({width, breakpoint}) => {
                                                         onClick={() => stopRide()}>Stop</Button>
                                                     :
                                                     <Button
+                                                        className='startButton'
                                                         marginTop={4}
+                                                        variant={"unstyled"}
                                                         onClick={() => startNewRide(bike.bikeId)}>Start</Button>}
                                             </Stack>
                                         </CardBody>
@@ -185,8 +187,8 @@ const Ride = ({width, breakpoint}) => {
                                         key={index}
                                         style={{
                                             marginTop: '20px',
-                                            backgroundColor: 'rgba(17, 17, 17, 0.8)',
-                                            backdropFilter: 'blur(11px)',
+                                            backgroundColor: 'rgba(0, 0, 0, 0.92)',
+                                            backdropFilter: 'blur(3px)',
                                             borderStyle: 'solid',
                                             borderWidth: '2px',
                                             borderColor: 'darkgoldenrod',
