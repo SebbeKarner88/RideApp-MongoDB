@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {HStack, Image} from "@chakra-ui/react";
 import logo from '../assets/images/RideApp-cropped-logo.webp'
 import {Link} from "react-router-dom";
@@ -6,6 +6,7 @@ import './CSS/Header.styles.css'
 import NavBar from "./Navbar";
 
 
+// @ts-ignore
 const Header = ({width, breakpoint}) => {
 
     return (

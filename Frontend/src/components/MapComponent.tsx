@@ -1,6 +1,6 @@
-import React from 'react';
 // @ts-ignore
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+// @ts-ignore
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -27,7 +27,7 @@ const MapComponent = ({ coordinatesList }) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {polylinePositions.map((position, index) => (
+            {polylinePositions.map((position: any[], index: number) => (
                 <Marker key={index} position={position} icon={customIcon}>
                     <Popup>
                         Point {index + 1}:<br />

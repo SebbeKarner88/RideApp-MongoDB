@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Landing from "./components/Landing";
 import About from "./components/About";
-import React, {useState} from "react";
+import React from "react";
 import Login from "./components/Login";
 import BikeDB from "./components/BikeDB";
 import Ride from "./components/Ride.tsx";

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {z} from "zod";
 import {FieldValues, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -67,7 +67,7 @@ const Register = () => {
     const {
         register,
         handleSubmit,
-        formState: {errors, isValid},
+        formState: {errors},
     } = useForm<FormData>({resolver: zodResolver(schema)});
 
 

@@ -4,9 +4,9 @@ import {
     Stack,
     Heading,
     Divider,
-    Image, HStack, Spinner, Button, Container,
+    Image, HStack, Spinner, Button
 } from '@chakra-ui/react'
-import React, {useEffect, useState} from "react"
+import {useEffect, useState} from "react"
 import {fetchApi} from "../services/fetch.api.tsx"
 import {IBike} from "../interfaces/IBike.ts"
 import "./CSS/BikeDB.styles.css"
@@ -17,7 +17,6 @@ const BikeDB = () => {
     const [bikeList, setBikeList] = useState<IBike[]>([]);
     const [userBikeList, setUserBikeList] = useState<IBike[]>([]);
     const [dbLoaded, setDbLoaded] = useState(false)
-    const [userLoaded, setUserLoaded] = useState(false)
 
     useEffect(() => {
         // @ts-ignore
@@ -28,7 +27,6 @@ const BikeDB = () => {
         // @ts-ignore
         fetchApi.getBikeCollectionByUserId(sessionStorage.getItem('userId'), sessionStorage.getItem('token')).then((bikes: IBike[]) => {
             setUserBikeList(bikes);
-            setUserLoaded(true);
         });
     }, []);
 

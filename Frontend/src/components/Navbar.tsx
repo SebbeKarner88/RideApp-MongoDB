@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Button, HStack, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
 import {GiHamburgerMenu} from "react-icons/gi";
 import './CSS/Navbar.styles.css'
 
+// @ts-ignore
 const NavBar = ({width, breakpoint}) => {
 
     const [loggedIn, setLoggedIn] = useState(false)

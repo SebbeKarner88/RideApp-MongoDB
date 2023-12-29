@@ -16,7 +16,6 @@ import {
 // @ts-ignore
 const AddBike = () => {
 
-    const [show, setShow] = useState(false);
     const [success, setSuccess] = useState<boolean>();
     const [showMessage, setShowMessage] = useState(false);
     const [message, setMessage] = useState('');
