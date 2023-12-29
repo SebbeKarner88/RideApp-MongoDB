@@ -5,8 +5,19 @@
     padding: 10px;
 }
 
+.addNewBike {
+    padding: 20px;
+    color: #a67e3f;
+    font-family: 'Montserrat', sans-serif;
+    justify-content: center;
+    align-content: space-between;
+    border: 2px solid #a67e3f;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.81);
+}
+
 .container {
-    height: 84vh;
+    height: 78vh;
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;

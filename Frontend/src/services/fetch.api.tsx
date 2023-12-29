@@ -127,4 +127,19 @@ import {IBike} from "../interfaces/IBike.ts";
                  .catch((e) => console.log(`Could not fetch data ${e}`))
          );
      },
+
+     addNewBike: (auth: string, bike:IBike) => {
+         return (
+             fetch("http://localhost:8080/bike/add", {
+                 method: "POST",
+                 headers: {
+                     "Authorization": "Bearer " + auth,
+                     "Content-Type": "application/json",
+                 },
+                 body: JSON.stringify(bike),
+             })
+                 .then((response) => response.json())
+                 .catch((e) => console.log(`Could not fetch data ${e}`))
+         );
+     },
 }

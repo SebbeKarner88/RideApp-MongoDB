@@ -14,6 +14,7 @@ import Login from "./components/Login";
 import BikeDB from "./components/BikeDB";
 import Ride from "./components/Ride.tsx";
 import Register from "./components/Register.tsx";
+import AddBike from "./components/AddBike.tsx";
 
 
 function App() {
@@ -47,11 +48,12 @@ function App() {
                         <GridItem area={'main'}>
                             <Routes>
                                 <Route path='/' element={<Landing breakpoint={breakpoint} width={width}/>}/>
-                                <Route path='/about' element={<About breakpoint={breakpoint} width={width}/>}/>
-                                <Route path='/login' element={<Login breakpoint={breakpoint} width={width}/>}/>
-                                <Route path='/bikeDB' element={<BikeDB breakpoint={breakpoint} width={width}/>}/>
-                                <Route path='/ride' element={<Ride breakpoint={breakpoint} width={width}/>}/>
-                                <Route path='/register' element={<Register breakpoint={breakpoint} width={width}/>}/>
+                                <Route path='/about' element={<About/>}/>
+                                <Route path='/login' element={<Login/>}/>
+                                <Route path='/bikeDB' element={<BikeDB/>}/>
+                                <Route path='/ride' element={<Ride/>}/>
+                                <Route path='/register' element={<Register/>}/>
+                                <Route path='/addbike' element={<AddBike/>}/>
                             </Routes>
                         </GridItem>
                         <GridItem area={'footer'}>

@@ -4,14 +4,15 @@ import {
     Stack,
     Heading,
     Divider,
-    Image, HStack, Spinner, Button,
+    Image, HStack, Spinner, Button, Container,
 } from '@chakra-ui/react'
 import React, {useEffect, useState} from "react"
 import {fetchApi} from "../services/fetch.api.tsx"
 import {IBike} from "../interfaces/IBike.ts"
 import "./CSS/BikeDB.styles.css"
+import {Link} from "react-router-dom";
 
-const BikeDB = ({width, breakpoint}) => {
+const BikeDB = () => {
 
     const [bikeList, setBikeList] = useState<IBike[]>([]);
     const [userBikeList, setUserBikeList] = useState<IBike[]>([]);
@@ -32,7 +33,7 @@ const BikeDB = ({width, breakpoint}) => {
     }, []);
 
 
-    function addBike(bike:IBike) {
+    function addBike(bike: IBike) {
 
         // @ts-ignore
         fetchApi.addBikeToCollection(sessionStorage.getItem('userId'), sessionStorage.getItem('token'), bike).then((bike: IBike) => {
@@ -43,6 +44,15 @@ const BikeDB = ({width, breakpoint}) => {
 
     return (
         <>
+            <HStack
+                justifyContent='center'>
+                <Link to={'/addBike'}>
+                    <Heading as="h2"
+                             className='addNewBike'
+                             margin={3}>Add new bike
+                    </Heading>
+                </Link>
+            </HStack>
             <div
                 className='container'>
                 {dbLoaded ?

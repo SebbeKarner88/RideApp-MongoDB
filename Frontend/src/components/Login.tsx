@@ -17,7 +17,7 @@ import './CSS/Login.styles.css'
 import {IAuthResponse} from "../interfaces/IAuthResponse.ts";
 import {Link} from "react-router-dom";
 
-const Login = ({width, breakpoint}) => {
+const Login = () => {
     const [show, setShow] = useState(false);
     const [success, setSuccess] = useState<boolean>();
     const [showMessage, setShowMessage] = useState(false);

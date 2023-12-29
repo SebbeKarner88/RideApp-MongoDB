@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 // @ts-ignore
-const Register = ({width, breakpoint}) => {
+const Register = () => {
 
     const [show, setShow] = useState(false);
     const [success, setSuccess] = useState<boolean>();

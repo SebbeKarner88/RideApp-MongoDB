@@ -19,7 +19,7 @@ import {IGeoLocation} from "../interfaces/IGeoLocation.ts";
 import MapComponent from "./MapComponent.tsx";
 
 
-const Ride = ({width, breakpoint}) => {
+const Ride = () => {
     const [bikeList, setBikeList] = useState<IBike[]>([]);
     const [bikesLoaded, setBikesLoaded] = useState(false)
     const [rideList, setRideList] = useState<IRide[]>([])
@@ -187,6 +187,7 @@ const Ride = ({width, breakpoint}) => {
                                         key={index}
                                         style={{
                                             marginTop: '20px',
+                                            marginBottom: '20px',
                                             backgroundColor: 'rgba(0, 0, 0, 0.92)',
                                             backdropFilter: 'blur(3px)',
                                             borderStyle: 'solid',
