@@ -20,13 +20,13 @@ import MapComponent from "./MapComponent.tsx";
 
 const Ride = () => {
     const [bikeList, setBikeList] = useState<IBike[]>([]);
-    const [bikesLoaded, setBikesLoaded] = useState(false)
-    const [rideList, setRideList] = useState<IRide[]>([])
-    const [ridesLoaded, setRidesLoaded] = useState(false)
-    const [latNumber, setLatNumber] = useState<number>(0)
-    const [longNumber, setLongNumber] = useState<number>(0)
-    const [currentRide, setCurrentRide] = useState<IRide>()
-    const [ongoingRide, setOngoingRide] = useState(false)
+    const [bikesLoaded, setBikesLoaded] = useState(false);
+    const [rideList, setRideList] = useState<IRide[]>([]);
+    const [ridesLoaded, setRidesLoaded] = useState(false);
+    const [latNumber, setLatNumber] = useState<number>(0);
+    const [longNumber, setLongNumber] = useState<number>(0);
+    const [currentRide, setCurrentRide] = useState<IRide>();
+    const [ongoingRide, setOngoingRide] = useState(false);
 
     let watchId: number
 
@@ -48,22 +48,18 @@ const Ride = () => {
         });
     }, []);
 
-
     function getLocation() {
         const options = {
             enableHighAccuracy: true,
             maximumAge: 0,
             timeout: 5000
         };
-        if (navigator.geolocation) {
-            watchId = navigator.geolocation.watchPosition(showPosition, errorHandler, options);
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
+
+        watchId = navigator.geolocation.watchPosition(showPosition, errorHandler, options);
     }
 
     function errorHandler() {
-        console.log("could not fetch geolocation")
+        console.log("Could not fetch geolocation");
     }
 
     function showPosition(position: any) {
@@ -72,32 +68,31 @@ const Ride = () => {
     }
 
     function addCheckpoint(rideId: string) {
-        getLocation();
         const geoLoc: IGeoLocation = {
             latitude: latNumber,
             longitude: longNumber
-        }
-        // @ts-ignore
+        };
+
         fetchApi.addGeoLocCheckpoint(sessionStorage.getItem('token'), rideId, geoLoc).then(updatedRide => {
-            setCurrentRide(updatedRide)
-        })
+            setCurrentRide(updatedRide);
+        });
     }
 
     function startNewRide(bikeId: string) {
         getLocation();
-        const rideEntity: { locCheckpoints: { latitude: number; longitude: number }[] } =
-            {
-                locCheckpoints: [{latitude: latNumber, longitude: longNumber}]
-            }
-        // @ts-ignore
+        const rideEntity: { locCheckpoints: { latitude: number; longitude: number }[] } = {
+            locCheckpoints: [{ latitude: latNumber, longitude: longNumber }]
+        };
+
         fetchApi.startNewRide(sessionStorage.getItem('userId'), bikeId, sessionStorage.getItem('token'), rideEntity).then((ride: IRide) => {
-            setOngoingRide(true)
-            setCurrentRide(ride)
+            setOngoingRide(true);
+            setCurrentRide(ride);
+
             const rideInterval = setInterval(() => {
                 getLocation();
                 addCheckpoint(ride.rideId);
             }, 10000);
-        })
+        });
     }
 
     function stopRide() {
@@ -105,6 +100,7 @@ const Ride = () => {
         navigator.geolocation.clearWatch(watchId);
         window.location.reload();
     }
+
 
     return (
         <>
