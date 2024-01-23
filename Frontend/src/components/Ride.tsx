@@ -28,6 +28,8 @@ const Ride = () => {
     const [currentRide, setCurrentRide] = useState<IRide>()
     const [ongoingRide, setOngoingRide] = useState(false)
 
+    let watchId: number
+
     useEffect(() => {
         getLocation();
         // @ts-ignore
@@ -54,7 +56,7 @@ const Ride = () => {
             timeout: 5000
         };
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, errorHandler, options);
+            watchId = navigator.geolocation.watchPosition(showPosition, errorHandler, options);
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
@@ -91,12 +93,16 @@ const Ride = () => {
         fetchApi.startNewRide(sessionStorage.getItem('userId'), bikeId, sessionStorage.getItem('token'), rideEntity).then((ride: IRide) => {
             setOngoingRide(true)
             setCurrentRide(ride)
-            const rideInterval = setInterval(() => addCheckpoint(ride.rideId), 10000);
+            const rideInterval = setInterval(() => {
+                getLocation();
+                addCheckpoint(ride.rideId);
+            }, 10000);
         })
     }
 
     function stopRide() {
         setOngoingRide(false);
+        navigator.geolocation.clearWatch(watchId);
         window.location.reload();
     }
 
