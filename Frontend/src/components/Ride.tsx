@@ -9,7 +9,7 @@ import {
     Stack,
     VStack
 } from "@chakra-ui/react";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {IRide} from "../interfaces/IRide.ts";
 import "./CSS/Ride.styles.css"
 import {fetchApi} from "../services/fetch.api.tsx";
@@ -23,12 +23,12 @@ const Ride = () => {
     const [bikesLoaded, setBikesLoaded] = useState(false);
     const [rideList, setRideList] = useState<IRide[]>([]);
     const [ridesLoaded, setRidesLoaded] = useState(false);
-    const [latNumber, setLatNumber] = useState<number>(0);
-    const [longNumber, setLongNumber] = useState<number>(0);
     const [currentRide, setCurrentRide] = useState<IRide>();
     const [ongoingRide, setOngoingRide] = useState(false);
 
-    let watchId: number
+    const latNumberRef = useRef<number>(0);
+    const longNumberRef = useRef<number>(0);
+    const watchIdRef = useRef<number>();
 
     useEffect(() => {
         getLocation();
@@ -55,7 +55,7 @@ const Ride = () => {
             timeout: 5000
         };
 
-        watchId = navigator.geolocation.watchPosition(showPosition, errorHandler, options);
+        watchIdRef.current = navigator.geolocation.watchPosition(showPosition, errorHandler, options);
     }
 
     function errorHandler() {
@@ -63,14 +63,14 @@ const Ride = () => {
     }
 
     function showPosition(position: any) {
-        setLatNumber(position.coords.latitude);
-        setLongNumber(position.coords.longitude);
+        latNumberRef.current = position.coords.latitude;
+        longNumberRef.current = position.coords.longitude;
     }
 
     function addCheckpoint(rideId: string) {
         const geoLoc: IGeoLocation = {
-            latitude: latNumber,
-            longitude: longNumber
+            latitude: latNumberRef.current,
+            longitude: longNumberRef.current
         };
 
         fetchApi.addGeoLocCheckpoint(sessionStorage.getItem('token'), rideId, geoLoc).then(updatedRide => {
@@ -81,7 +81,7 @@ const Ride = () => {
     function startNewRide(bikeId: string) {
         getLocation();
         const rideEntity: { locCheckpoints: { latitude: number; longitude: number }[] } = {
-            locCheckpoints: [{ latitude: latNumber, longitude: longNumber }]
+            locCheckpoints: [{ latitude: latNumberRef.current, longitude: longNumberRef.current }]
         };
 
         fetchApi.startNewRide(sessionStorage.getItem('userId'), bikeId, sessionStorage.getItem('token'), rideEntity).then((ride: IRide) => {
@@ -97,10 +97,9 @@ const Ride = () => {
 
     function stopRide() {
         setOngoingRide(false);
-        navigator.geolocation.clearWatch(watchId);
+        navigator.geolocation.clearWatch(watchIdRef.current);
         window.location.reload();
     }
-
 
     return (
         <>
