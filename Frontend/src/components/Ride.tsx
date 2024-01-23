@@ -6,11 +6,10 @@ import {
     Heading,
     HStack,
     Image,
-    Spinner,
     Stack,
     VStack
 } from "@chakra-ui/react";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {IRide} from "../interfaces/IRide.ts";
 import "./CSS/Ride.styles.css"
 import {fetchApi} from "../services/fetch.api.tsx";
@@ -49,11 +48,20 @@ const Ride = () => {
 
 
     function getLocation() {
+        const options = {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 5000
+        };
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(showPosition, errorHandler, options);
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
+    }
+
+    function errorHandler() {
+        console.log("could not fetch geolocation")
     }
 
     function showPosition(position: any) {
