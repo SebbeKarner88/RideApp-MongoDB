@@ -14,7 +14,6 @@ import {IRide} from "../interfaces/IRide.ts";
 import "./CSS/Ride.styles.css"
 import {fetchApi} from "../services/fetch.api.tsx";
 import {IBike} from "../interfaces/IBike.ts";
-import {IGeoLocation} from "../interfaces/IGeoLocation.ts";
 import MapComponent from "./MapComponent.tsx";
 
 
@@ -24,14 +23,12 @@ const Ride = () => {
     const [rideList, setRideList] = useState<IRide[]>([]);
     const [ridesLoaded, setRidesLoaded] = useState(false);
     const [currentRide, setCurrentRide] = useState<IRide>();
-    const [ongoingRide, setOngoingRide] = useState(false);
 
-    const latNumberRef = useRef<number>(0);
-    const longNumberRef = useRef<number>(0);
-    const watchIdRef = useRef<number>();
+    const [coordinates, setCoordinates] = useState<{ latitude: number; longitude: number }>();
+    const [isTracking, setIsTracking] = useState<boolean>(false);
 
     useEffect(() => {
-        getLocation();
+        fetchCoordinates();
         // @ts-ignore
         fetchApi.getAllRides(sessionStorage.getItem('userId'), sessionStorage.getItem('token')).then((rides: IRide[]) => {
             if (rides.length > 0) {
@@ -48,56 +45,56 @@ const Ride = () => {
         });
     }, []);
 
-    function getLocation() {
-        const options = {
-            enableHighAccuracy: true,
-            maximumAge: 0,
-            timeout: 5000
+    useEffect(() => {
+        let intervalId: number;
+
+        if (isTracking) {
+            intervalId = setInterval(addCoordinates, 3000);
+        }
+
+        return () => {
+            if (intervalId) clearInterval(intervalId);
         };
+    }, [isTracking]);
 
-        watchIdRef.current = navigator.geolocation.watchPosition(showPosition, errorHandler, options);
-    }
+    const fetchCoordinates = () => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                setCoordinates({ latitude, longitude });
+            },
+            (error) => {
+                console.error('Error getting coordinates:', error);
+            }
+        );
+    };
 
-    function errorHandler() {
-        console.log("Could not fetch geolocation");
-    }
-
-    function showPosition(position: any) {
-        latNumberRef.current = position.coords.latitude;
-        longNumberRef.current = position.coords.longitude;
-    }
-
-    function addCheckpoint(rideId: string) {
-        const geoLoc: IGeoLocation = {
-            latitude: latNumberRef.current,
-            longitude: longNumberRef.current
-        };
-
-        fetchApi.addGeoLocCheckpoint(sessionStorage.getItem('token'), rideId, geoLoc).then(updatedRide => {
-            setCurrentRide(updatedRide);
-        });
-    }
+    const addCoordinates = () => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                setCoordinates({ latitude, longitude });
+                fetchApi.addGeoLocCheckpoint(sessionStorage.getItem('token'), currentRide?.rideId, {latitude, longitude}).then(updatedRide => {
+                    setCurrentRide(updatedRide);
+                });
+            },
+            (error) => {
+                console.error('Error getting coordinates:', error);
+            }
+        );
+    };
 
     function startNewRide(bikeId: string) {
-        getLocation();
-        const rideEntity: { locCheckpoints: { latitude: number; longitude: number }[] } = {
-            locCheckpoints: [{ latitude: latNumberRef.current, longitude: longNumberRef.current }]
-        };
-
+        const rideEntity: { locCheckpoints: { latitude: number; longitude: number }[] } = {locCheckpoints: [coordinates]};
         fetchApi.startNewRide(sessionStorage.getItem('userId'), bikeId, sessionStorage.getItem('token'), rideEntity).then((ride: IRide) => {
-            setOngoingRide(true);
             setCurrentRide(ride);
-
-            const rideInterval = setInterval(() => {
-                getLocation();
-                addCheckpoint(ride.rideId);
-            }, 10000);
+            setIsTracking(true);
         });
+
     }
 
     function stopRide() {
-        setOngoingRide(false);
-        navigator.geolocation.clearWatch(watchIdRef.current);
+        setIsTracking(false)
         window.location.reload();
     }
 
@@ -153,7 +150,7 @@ const Ride = () => {
                                             </Stack>
                                             <Divider marginTop={2}/>
                                             <Stack>
-                                                {ongoingRide ?
+                                                {isTracking ?
                                                     <Button
                                                         marginTop={4}
                                                         onClick={() => stopRide()}>Stop</Button>
