@@ -9,13 +9,12 @@ import {
     Stack,
     VStack
 } from "@chakra-ui/react";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {IRide} from "../interfaces/IRide.ts";
 import "./CSS/Ride.styles.css"
 import {fetchApi} from "../services/fetch.api.tsx";
 import {IBike} from "../interfaces/IBike.ts";
 import MapComponent from "./MapComponent.tsx";
-
 
 const Ride = () => {
     const [bikeList, setBikeList] = useState<IBike[]>([]);
@@ -49,7 +48,7 @@ const Ride = () => {
         let intervalId: number;
 
         if (isTracking) {
-            intervalId = setInterval(addCoordinates, 3000);
+            intervalId = setInterval(addCoordinates, 5000);
         }
 
         return () => {
@@ -74,6 +73,7 @@ const Ride = () => {
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setCoordinates({ latitude, longitude });
+                // @ts-ignore
                 fetchApi.addGeoLocCheckpoint(sessionStorage.getItem('token'), currentRide?.rideId, {latitude, longitude}).then(updatedRide => {
                     setCurrentRide(updatedRide);
                 });
@@ -85,7 +85,9 @@ const Ride = () => {
     };
 
     function startNewRide(bikeId: string) {
+        // @ts-ignore
         const rideEntity: { locCheckpoints: { latitude: number; longitude: number }[] } = {locCheckpoints: [coordinates]};
+        // @ts-ignore
         fetchApi.startNewRide(sessionStorage.getItem('userId'), bikeId, sessionStorage.getItem('token'), rideEntity).then((ride: IRide) => {
             setCurrentRide(ride);
             setIsTracking(true);
