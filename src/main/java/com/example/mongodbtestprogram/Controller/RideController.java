@@ -31,8 +31,8 @@ public class RideController {
 
     @PostMapping("/addCheckpoint")
     public RideEntity addCheckpoint(@RequestHeader UUID rideId,
-                                    @RequestBody GeoLocationEntity geoLocationEntity) {
-        return rideService.addCheckpoint(rideId, geoLocationEntity);
+                                    @RequestBody List<GeoLocationEntity> geoLocationEntity) {
+        return rideService.addCheckpoints(rideId, geoLocationEntity);
     }
 
     @GetMapping("/getAll")

@@ -99,7 +99,7 @@ public class RideService {
         return false;
     }
 
-    public RideEntity addCheckpoint(UUID rideId, GeoLocationEntity geoLocationEntity) {
+    public RideEntity addCheckpoints(UUID rideId, List<GeoLocationEntity> geoLocationEntity) {
 
         RideEntity ride = rideRepository.findById(rideId).get();
         UserEntity user = userRepository.findById(ride.getUser().getUserId()).get();

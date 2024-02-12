@@ -5,13 +5,14 @@ import com.example.mongodbtestprogram.Entities.RideEntity;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class RideFunctions {
 
-    public static RideEntity updateRideWithCheckpoint(RideEntity currentRide, GeoLocationEntity geoLocationEntity) {
+    public static RideEntity updateRideWithCheckpoint(RideEntity currentRide, List<GeoLocationEntity> geoLocationEntity) {
 
         currentRide.setEndTime(LocalDateTime.now());
-        currentRide.getLocCheckpoints().add(geoLocationEntity);
+        currentRide.setLocCheckpoints(geoLocationEntity);
 
         double distanceUpdate = Calculations.calcTotalDistance(currentRide).doubleValue();
         Duration d = Duration.between(currentRide.getStartTime(), currentRide.getEndTime());

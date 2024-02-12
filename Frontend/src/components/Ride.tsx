@@ -23,6 +23,7 @@ const Ride = () => {
     const [ridesLoaded, setRidesLoaded] = useState(false);
     const [currentRide, setCurrentRide] = useState<IRide>();
 
+    const [coordinatesList, setCoordinatesList] = useState<{ latitude: number; longitude: number }[]>([]);
     const [coordinates, setCoordinates] = useState<{ latitude: number; longitude: number }>();
     const [isTracking, setIsTracking] = useState<boolean>(false);
 
@@ -49,6 +50,7 @@ const Ride = () => {
 
         if (isTracking) {
             intervalId = setInterval(addCoordinates, 5000);
+            addCoordinates();
         }
 
         return () => {
@@ -72,11 +74,7 @@ const Ride = () => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
-                setCoordinates({ latitude, longitude });
-                // @ts-ignore
-                fetchApi.addGeoLocCheckpoint(sessionStorage.getItem('token'), currentRide?.rideId, {latitude, longitude}).then(updatedRide => {
-                    setCurrentRide(updatedRide);
-                });
+                setCoordinatesList((prevList) => [...prevList, { latitude, longitude }]);
             },
             (error) => {
                 console.error('Error getting coordinates:', error);
@@ -97,6 +95,10 @@ const Ride = () => {
 
     function stopRide() {
         setIsTracking(false)
+        // @ts-ignore
+        fetchApi.addGeoLocCheckpoint(sessionStorage.getItem('token'), currentRide?.rideId, coordinatesList).then(updatedRide => {
+            setCurrentRide(updatedRide);
+        });
         window.location.reload();
     }
 

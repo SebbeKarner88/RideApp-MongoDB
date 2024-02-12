@@ -96,7 +96,7 @@ import {IBike} from "../interfaces/IBike.ts";
          );
      },
 
-     addGeoLocCheckpoint: (auth: string, rideId: string, geoLoc: IGeoLocation) => {
+     addGeoLocCheckpoint: (auth: string, rideId: string, geoLoc: IGeoLocation[]) => {
          return (
              fetch("http://localhost:8080/rides/addCheckpoint", {
                  method: "POST",
