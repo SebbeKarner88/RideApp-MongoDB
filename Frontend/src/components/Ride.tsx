@@ -70,6 +70,11 @@ const Ride = () => {
         );
     };
 
+    const options = {
+        enableHighAccuracy: true,
+        maximumAge: 0 // Forces the browser to get the current location instead of returning a cached result.
+    };
+
     const addCoordinates = () => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -78,8 +83,8 @@ const Ride = () => {
             },
             (error) => {
                 console.error('Error getting coordinates:', error);
-            }
-        );
+            },
+        options);
     };
 
     function startNewRide(bikeId: string) {
