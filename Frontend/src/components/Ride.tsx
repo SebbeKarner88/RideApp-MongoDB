@@ -28,7 +28,7 @@ const Ride = () => {
     const [isTracking, setIsTracking] = useState<boolean>(false);
 
     useEffect(() => {
-        fetchCoordinates();
+        startCoordinates();
         // @ts-ignore
         fetchApi.getAllRides(sessionStorage.getItem('userId'), sessionStorage.getItem('token')).then((rides: IRide[]) => {
             if (rides.length > 0) {
@@ -49,8 +49,8 @@ const Ride = () => {
         let intervalId: number;
 
         if (isTracking) {
-            intervalId = setInterval(addCoordinates, 5000);
-            addCoordinates();
+            intervalId = setInterval(fetchCoordinates, 3000);
+            fetchCoordinates();
         }
 
         return () => {
@@ -58,7 +58,7 @@ const Ride = () => {
         };
     }, [isTracking]);
 
-    const fetchCoordinates = () => {
+    const startCoordinates = () => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
@@ -72,10 +72,10 @@ const Ride = () => {
 
     const options = {
         enableHighAccuracy: true,
-        maximumAge: 0 // Forces the browser to get the current location instead of returning a cached result.
+        maximumAge: 0
     };
 
-    const addCoordinates = () => {
+    const fetchCoordinates = () => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
@@ -84,7 +84,7 @@ const Ride = () => {
             (error) => {
                 console.error('Error getting coordinates:', error);
             },
-        options);
+            options);
     };
 
     function startNewRide(bikeId: string) {
