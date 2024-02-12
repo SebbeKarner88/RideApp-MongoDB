@@ -49,7 +49,7 @@ const Ride = () => {
         let intervalId: number;
 
         if (isTracking) {
-            intervalId = setInterval(fetchCoordinates, 3000);
+            intervalId = setInterval(fetchCoordinates, 8000);
             fetchCoordinates();
         }
 
