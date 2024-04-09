@@ -6,7 +6,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
 const local = "http://localhost:8080";
 const deployed = "https://rideapp-5hf9.onrender.com";
-let isDeployed = true;
+let isDeployed = false;
 let url = isDeployed ? deployed : local;
  export const fetchApi = {
 
