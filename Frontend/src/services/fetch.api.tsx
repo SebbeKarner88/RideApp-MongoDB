@@ -11,7 +11,7 @@ export const fetchApi = {
             fetch("https://rideapp-latest.onrender.com/api/auth/authenticate", {
                 method: "POST",
                 headers: {
-                    "Access-Control-Allow-Origin": "https://ride-app-mongo-db-5qft.vercel.app/",
+                    "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(login),
@@ -26,7 +26,7 @@ export const fetchApi = {
             fetch("https://rideapp-latest.onrender.com/api/auth/register", {
                 method: "POST",
                 headers: {
-                    "Access-Control-Allow-Origin": "https://ride-app-mongo-db-5qft.vercel.app/",
+                    "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data),
@@ -41,7 +41,7 @@ export const fetchApi = {
             fetch("https://rideapp-latest.onrender.com/bike/getAll", {
                 method: "GET",
                 headers: {
-                    "Access-Control-Allow-Origin": "https://ride-app-mongo-db-5qft.vercel.app/",
+                    "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
                     "Content-Type": "application/json",
                 },
@@ -56,7 +56,7 @@ export const fetchApi = {
             fetch("https://rideapp-latest.onrender.com/rides/getAllByUserId", {
                 method: "GET",
                 headers: {
-                    "Access-Control-Allow-Origin": "https://ride-app-mongo-db-5qft.vercel.app/",
+                    "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
                     "userId": userId,
                     "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export const fetchApi = {
             fetch("https://rideapp-latest.onrender.com/user/getBikeCollectionByUserId", {
                 method: "GET",
                 headers: {
-                    "Access-Control-Allow-Origin": "https://ride-app-mongo-db-5qft.vercel.app/",
+                    "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
                     "userId": userId,
                     "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export const fetchApi = {
             fetch("https://rideapp-latest.onrender.com/rides/add", {
                 method: "POST",
                 headers: {
-                    "Access-Control-Allow-Origin": "https://ride-app-mongo-db-5qft.vercel.app/",
+                    "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
                     "userId": userId,
                     "bikeId": bikeId,
@@ -106,7 +106,7 @@ export const fetchApi = {
             fetch("https://rideapp-latest.onrender.com/rides/addCheckpoint", {
                 method: "POST",
                 headers: {
-                    "Access-Control-Allow-Origin": "https://ride-app-mongo-db-5qft.vercel.app/",
+                    "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
                     "rideId": rideId,
                     "Content-Type": "application/json",
@@ -123,7 +123,7 @@ export const fetchApi = {
             fetch("https://rideapp-latest.onrender.com/bike/addToBikeCollection", {
                 method: "POST",
                 headers: {
-                    "Access-Control-Allow-Origin": "https://ride-app-mongo-db-5qft.vercel.app/",
+                    "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
                     "userId": userId,
                     "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export const fetchApi = {
             fetch("https://rideapp-latest.onrender.com/bike/add", {
                 method: "POST",
                 headers: {
-                    "Access-Control-Allow-Origin": "https://ride-app-mongo-db-5qft.vercel.app/",
+                    "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
                     "Content-Type": "application/json",
                 },
