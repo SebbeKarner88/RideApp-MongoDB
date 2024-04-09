@@ -15,9 +15,6 @@ let url = isDeployed ? deployed : local;
             fetch( url + "/api/auth/authenticate", {
                 method: "POST",
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                    "Access-Control-Allow-credentials": "true",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(login),
@@ -32,9 +29,6 @@ let url = isDeployed ? deployed : local;
              fetch(url + "/api/auth/register", {
                  method: "POST",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-credentials": "true",
                      "Content-Type": "application/json",
                  },
                  body: JSON.stringify(data),
@@ -49,9 +43,6 @@ let url = isDeployed ? deployed : local;
              fetch(url + "/bike/getAll", {
                  method: "GET",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "Content-Type": "application/json",
                  },
@@ -66,9 +57,6 @@ let url = isDeployed ? deployed : local;
              fetch(url + "/rides/getAllByUserId", {
                  method: "GET",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "Content-Type": "application/json",
@@ -84,9 +72,6 @@ let url = isDeployed ? deployed : local;
              fetch(url + "/user/getBikeCollectionByUserId", {
                  method: "GET",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "Content-Type": "application/json",
@@ -102,9 +87,6 @@ let url = isDeployed ? deployed : local;
              fetch(url + "/rides/add", {
                  method: "POST",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "bikeId": bikeId,
@@ -122,9 +104,6 @@ let url = isDeployed ? deployed : local;
              fetch(url + "/rides/addCheckpoint", {
                  method: "POST",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "rideId": rideId,
                      "Content-Type": "application/json",
@@ -141,9 +120,6 @@ let url = isDeployed ? deployed : local;
              fetch(url + "/bike/addToBikeCollection", {
                  method: "POST",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "Content-Type": "application/json",
@@ -160,9 +136,6 @@ let url = isDeployed ? deployed : local;
              fetch(url + "/bike/add", {
                  method: "POST",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "Content-Type": "application/json",
                  },
