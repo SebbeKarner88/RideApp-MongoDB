@@ -9,7 +9,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
     login: (login: FieldValues) => {
         return (
-            fetch("https://rideapp-latest.onrender.com/api/auth/authenticate", {
+            fetch("http://localhost:8080/api/auth/authenticate", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -23,7 +23,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      register: (data: FieldValues) => {
          return (
-             fetch("https://rideapp-latest.onrender.com/api/auth/register", {
+             fetch("http://localhost:8080/api/auth/register", {
                  method: "POST",
                  headers: {
                      "Content-Type": "application/json",
@@ -37,7 +37,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      getAllBikes: (auth: string) => {
          return (
-             fetch("https://rideapp-latest.onrender.com/bike/getAll", {
+             fetch("http://localhost:8080/bike/getAll", {
                  method: "GET",
                  headers: {
                      "Authorization": "Bearer " + auth,
@@ -51,7 +51,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      getAllRides: (userId: string, auth: string) => {
          return (
-             fetch("https://rideapp-latest.onrender.com/rides/getAllByUserId", {
+             fetch("http://localhost:8080/rides/getAllByUserId", {
                  method: "GET",
                  headers: {
                      "Authorization": "Bearer " + auth,
@@ -66,7 +66,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      getBikeCollectionByUserId: (userId: string, auth: string) => {
          return (
-             fetch("https://rideapp-latest.onrender.com/user/getBikeCollectionByUserId", {
+             fetch("http://localhost:8080/user/getBikeCollectionByUserId", {
                  method: "GET",
                  headers: {
                      "Authorization": "Bearer " + auth,
@@ -81,7 +81,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      startNewRide: (userId: string, bikeId: string, auth: string, rideEntity:IRide) => {
          return (
-             fetch("https://rideapp-latest.onrender.com/rides/add", {
+             fetch("http://localhost:8080/rides/add", {
                  method: "POST",
                  headers: {
                      "Authorization": "Bearer " + auth,
@@ -98,7 +98,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      addGeoLocCheckpoint: (auth: string, rideId: string, geoLoc: IGeoLocation[]) => {
          return (
-             fetch("https://rideapp-latest.onrender.com/rides/addCheckpoint", {
+             fetch("http://localhost:8080/rides/addCheckpoint", {
                  method: "POST",
                  headers: {
                      "Authorization": "Bearer " + auth,
@@ -114,7 +114,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      addBikeToCollection: (userId: string, auth: string, bike:IBike) => {
          return (
-             fetch("https://rideapp-latest.onrender.com/bike/addToBikeCollection", {
+             fetch("http://localhost:8080/bike/addToBikeCollection", {
                  method: "POST",
                  headers: {
                      "Authorization": "Bearer " + auth,
@@ -130,7 +130,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      addNewBike: (auth: string, bike:IBike) => {
          return (
-             fetch("https://rideapp-latest.onrender.com/bike/add", {
+             fetch("http://localhost:8080/bike/add", {
                  method: "POST",
                  headers: {
                      "Authorization": "Bearer " + auth,
