@@ -67,6 +67,7 @@ const AddBike = () => {
     } = useForm<FormData>({resolver: zodResolver(schema)});
 
 
+
     const handleAddBike = (data: FieldValues) => {
 
         data.pictures = data.pictures.split(',').map((url:string) => url.trim());
