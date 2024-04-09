@@ -6,7 +6,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
 const local = "http://localhost:8080";
 const deployed = "https://rideapp-latest.onrender.com";
-let isDeployed = true;
+let isDeployed = false;
 let url = isDeployed ? deployed : local;
  export const fetchApi = {
 
@@ -14,12 +14,7 @@ let url = isDeployed ? deployed : local;
         return (
             fetch( url + "/api/auth/authenticate", {
                 method: "POST",
-                mode: "no-cors",
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-                    "Access-Control-Allow-Credentials": "true",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(login),
@@ -33,12 +28,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/api/auth/register", {
                  method: "POST",
-                 mode: "no-cors",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-                     "Access-Control-Allow-Credentials": "true",
                      "Content-Type": "application/json",
                  },
                  body: JSON.stringify(data),
@@ -52,12 +42,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/bike/getAll", {
                  method: "GET",
-                 mode: "no-cors",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-                     "Access-Control-Allow-Credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "Content-Type": "application/json",
                  },
@@ -71,12 +56,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/rides/getAllByUserId", {
                  method: "GET",
-                 mode: "no-cors",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-                     "Access-Control-Allow-Credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "Content-Type": "application/json",
@@ -91,12 +71,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/user/getBikeCollectionByUserId", {
                  method: "GET",
-                 mode: "no-cors",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-                     "Access-Control-Allow-Credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "Content-Type": "application/json",
@@ -111,12 +86,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/rides/add", {
                  method: "POST",
-                 mode: "no-cors",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-                     "Access-Control-Allow-Credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "bikeId": bikeId,
@@ -133,12 +103,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/rides/addCheckpoint", {
                  method: "POST",
-                 mode: "no-cors",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-                     "Access-Control-Allow-Credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "rideId": rideId,
                      "Content-Type": "application/json",
@@ -154,12 +119,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/bike/addToBikeCollection", {
                  method: "POST",
-                 mode: "no-cors",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-                     "Access-Control-Allow-Credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "Content-Type": "application/json",
@@ -175,12 +135,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/bike/add", {
                  method: "POST",
-                 mode: "no-cors",
                  headers: {
-                     "Access-Control-Allow-Origin": "*",
-                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-                     "Access-Control-Allow-Credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "Content-Type": "application/json",
                  },
