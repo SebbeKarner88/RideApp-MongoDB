@@ -4,12 +4,15 @@ import {IGeoLocation} from "../interfaces/IGeoLocation.ts";
 import {IRide} from "../interfaces/IRide.ts";
 import {IBike} from "../interfaces/IBike.ts";
 
-
+const local = "http://localhost:8080";
+const deployed = "https://rideapp-5hf9.onrender.com";
+let isDeployed = false;
+let url = isDeployed ? deployed : local;
  export const fetchApi = {
 
     login: (login: FieldValues) => {
         return (
-            fetch("http://localhost:8080/api/auth/authenticate", {
+            fetch( url + "/api/auth/authenticate", {
                 method: "POST",
                 headers: {
                     "Access-Control-Allow-Origin": "*",
@@ -26,7 +29,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      register: (data: FieldValues) => {
          return (
-             fetch("http://localhost:8080/api/auth/register", {
+             fetch(url + "/api/auth/register", {
                  method: "POST",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
@@ -43,7 +46,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      getAllBikes: (auth: string) => {
          return (
-             fetch("http://localhost:8080/bike/getAll", {
+             fetch(url + "/bike/getAll", {
                  method: "GET",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
@@ -60,7 +63,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      getAllRides: (userId: string, auth: string) => {
          return (
-             fetch("http://localhost:8080/rides/getAllByUserId", {
+             fetch(url + "/rides/getAllByUserId", {
                  method: "GET",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
@@ -78,7 +81,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      getBikeCollectionByUserId: (userId: string, auth: string) => {
          return (
-             fetch("http://localhost:8080/user/getBikeCollectionByUserId", {
+             fetch(url + "/user/getBikeCollectionByUserId", {
                  method: "GET",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
@@ -96,7 +99,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      startNewRide: (userId: string, bikeId: string, auth: string, rideEntity:IRide) => {
          return (
-             fetch("http://localhost:8080/rides/add", {
+             fetch(url + "/rides/add", {
                  method: "POST",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
@@ -116,7 +119,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      addGeoLocCheckpoint: (auth: string, rideId: string, geoLoc: IGeoLocation[]) => {
          return (
-             fetch("http://localhost:8080/rides/addCheckpoint", {
+             fetch(url + "/rides/addCheckpoint", {
                  method: "POST",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
@@ -135,7 +138,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      addBikeToCollection: (userId: string, auth: string, bike:IBike) => {
          return (
-             fetch("http://localhost:8080/bike/addToBikeCollection", {
+             fetch(url + "/bike/addToBikeCollection", {
                  method: "POST",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
@@ -154,7 +157,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
      addNewBike: (auth: string, bike:IBike) => {
          return (
-             fetch("http://localhost:8080/bike/add", {
+             fetch(url + "/bike/add", {
                  method: "POST",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
