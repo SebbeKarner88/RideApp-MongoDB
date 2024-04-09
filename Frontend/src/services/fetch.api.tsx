@@ -12,6 +12,9 @@ import {IBike} from "../interfaces/IBike.ts";
             fetch("http://localhost:8080/api/auth/authenticate", {
                 method: "POST",
                 headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                    "Access-Control-Allow-credentials": "true",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(login),
@@ -26,6 +29,9 @@ import {IBike} from "../interfaces/IBike.ts";
              fetch("http://localhost:8080/api/auth/register", {
                  method: "POST",
                  headers: {
+                     "Access-Control-Allow-Origin": "*",
+                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                     "Access-Control-Allow-credentials": "true",
                      "Content-Type": "application/json",
                  },
                  body: JSON.stringify(data),
@@ -40,6 +46,9 @@ import {IBike} from "../interfaces/IBike.ts";
              fetch("http://localhost:8080/bike/getAll", {
                  method: "GET",
                  headers: {
+                     "Access-Control-Allow-Origin": "*",
+                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "Content-Type": "application/json",
                  },
@@ -54,6 +63,9 @@ import {IBike} from "../interfaces/IBike.ts";
              fetch("http://localhost:8080/rides/getAllByUserId", {
                  method: "GET",
                  headers: {
+                     "Access-Control-Allow-Origin": "*",
+                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "Content-Type": "application/json",
@@ -69,6 +81,9 @@ import {IBike} from "../interfaces/IBike.ts";
              fetch("http://localhost:8080/user/getBikeCollectionByUserId", {
                  method: "GET",
                  headers: {
+                     "Access-Control-Allow-Origin": "*",
+                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "Content-Type": "application/json",
@@ -84,6 +99,9 @@ import {IBike} from "../interfaces/IBike.ts";
              fetch("http://localhost:8080/rides/add", {
                  method: "POST",
                  headers: {
+                     "Access-Control-Allow-Origin": "*",
+                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "bikeId": bikeId,
@@ -101,6 +119,9 @@ import {IBike} from "../interfaces/IBike.ts";
              fetch("http://localhost:8080/rides/addCheckpoint", {
                  method: "POST",
                  headers: {
+                     "Access-Control-Allow-Origin": "*",
+                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "rideId": rideId,
                      "Content-Type": "application/json",
@@ -117,6 +138,9 @@ import {IBike} from "../interfaces/IBike.ts";
              fetch("http://localhost:8080/bike/addToBikeCollection", {
                  method: "POST",
                  headers: {
+                     "Access-Control-Allow-Origin": "*",
+                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "userId": userId,
                      "Content-Type": "application/json",
@@ -133,6 +157,9 @@ import {IBike} from "../interfaces/IBike.ts";
              fetch("http://localhost:8080/bike/add", {
                  method: "POST",
                  headers: {
+                     "Access-Control-Allow-Origin": "*",
+                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                     "Access-Control-Allow-credentials": "true",
                      "Authorization": "Bearer " + auth,
                      "Content-Type": "application/json",
                  },
