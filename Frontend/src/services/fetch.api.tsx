@@ -6,7 +6,6 @@ import {IBike} from "../interfaces/IBike.ts";
 
 export const fetchApi = {
 
-
     login: (login: FieldValues) => {
         return (
             fetch("https://rideapp-latest.onrender.com/api/auth/authenticate", {
