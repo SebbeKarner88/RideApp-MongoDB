@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {z} from "zod";
 import {FieldValues, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -63,17 +63,18 @@ const AddBike = () => {
     const {
         register,
         handleSubmit,
-        formState: {errors, isValid},
+        formState: {errors},
     } = useForm<FormData>({resolver: zodResolver(schema)});
+
 
 
     const handleAddBike = (data: FieldValues) => {
 
         data.pictures = data.pictures.split(',').map((url:string) => url.trim());
         data.colors = data.colors.split(',').map((color:string) => color.trim());
+
         // @ts-ignore
-        fetchApi
-            .addNewBike(sessionStorage.getItem('token'), data)
+        fetchApi.addNewBike(sessionStorage.getItem('token'), data)
             .then(() => {
                 setShowMessage(true);
                 setMessage('Successfully added');
