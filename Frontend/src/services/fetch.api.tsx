@@ -10,6 +10,7 @@ export const fetchApi = {
         return (
             fetch("https://rideapp-latest.onrender.com/api/auth/authenticate", {
                 method: "POST",
+                mode: 'no-cors',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -25,6 +26,7 @@ export const fetchApi = {
         return (
             fetch("https://rideapp-latest.onrender.com/api/auth/register", {
                 method: "POST",
+                mode: 'no-cors',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -40,6 +42,7 @@ export const fetchApi = {
         return (
             fetch("https://rideapp-latest.onrender.com/bike/getAll", {
                 method: "GET",
+                mode: 'no-cors',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
@@ -55,6 +58,7 @@ export const fetchApi = {
         return (
             fetch("https://rideapp-latest.onrender.com/rides/getAllByUserId", {
                 method: "GET",
+                mode: 'no-cors',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
@@ -71,6 +75,7 @@ export const fetchApi = {
         return (
             fetch("https://rideapp-latest.onrender.com/user/getBikeCollectionByUserId", {
                 method: "GET",
+                mode: 'no-cors',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
@@ -87,6 +92,7 @@ export const fetchApi = {
         return (
             fetch("https://rideapp-latest.onrender.com/rides/add", {
                 method: "POST",
+                mode: 'no-cors',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
@@ -105,6 +111,7 @@ export const fetchApi = {
         return (
             fetch("https://rideapp-latest.onrender.com/rides/addCheckpoint", {
                 method: "POST",
+                mode: 'no-cors',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
@@ -122,6 +129,7 @@ export const fetchApi = {
         return (
             fetch("https://rideapp-latest.onrender.com/bike/addToBikeCollection", {
                 method: "POST",
+                mode: 'no-cors',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
@@ -139,6 +147,7 @@ export const fetchApi = {
         return (
             fetch("https://rideapp-latest.onrender.com/bike/add", {
                 method: "POST",
+                mode: 'no-cors',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Authorization": "Bearer " + auth,
