@@ -7,6 +7,7 @@ import {IBike} from "../interfaces/IBike.ts";
 
  export const fetchApi = {
 
+
     login: (login: FieldValues) => {
         return (
             fetch("http://localhost:8080/api/auth/authenticate", {
