@@ -1,3 +1,4 @@
+import React from 'react';
 import './CSS/Footer.styles.css'
 import {HStack} from "@chakra-ui/react";
 import {FaRegCopyright} from "react-icons/fa";
