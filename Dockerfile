@@ -5,4 +5,4 @@ VOLUME /tmp
 
 COPY target/MongoDB-Testprogram-0.0.1-SNAPSHOT.jar MongoDB.jar
 ENTRYPOINT ["java","-jar","/MongoDB.jar"]
-EXPOSE 8080
+EXPOSE 10000
