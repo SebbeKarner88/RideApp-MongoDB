@@ -14,6 +14,7 @@ let url = isDeployed ? deployed : local;
         return (
             fetch( url + "/api/auth/authenticate", {
                 method: "POST",
+                mode: "no-cors",
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -32,6 +33,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/api/auth/register", {
                  method: "POST",
+                 mode: "no-cors",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
                      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -50,6 +52,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/bike/getAll", {
                  method: "GET",
+                 mode: "no-cors",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
                      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -68,6 +71,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/rides/getAllByUserId", {
                  method: "GET",
+                 mode: "no-cors",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
                      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -87,6 +91,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/user/getBikeCollectionByUserId", {
                  method: "GET",
+                 mode: "no-cors",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
                      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -106,6 +111,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/rides/add", {
                  method: "POST",
+                 mode: "no-cors",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
                      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -127,6 +133,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/rides/addCheckpoint", {
                  method: "POST",
+                 mode: "no-cors",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
                      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -147,6 +154,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/bike/addToBikeCollection", {
                  method: "POST",
+                 mode: "no-cors",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
                      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -167,6 +175,7 @@ let url = isDeployed ? deployed : local;
          return (
              fetch(url + "/bike/add", {
                  method: "POST",
+                 mode: "no-cors",
                  headers: {
                      "Access-Control-Allow-Origin": "*",
                      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
